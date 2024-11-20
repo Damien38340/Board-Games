@@ -5,10 +5,6 @@ import org.example.views.View;
 
 public class TicTacToe extends BoardGame {
 
-    private final int size;
-    private final Cell[][] cells;
-    View view;
-
     public TicTacToe() {
         view = new View();
         size = 3;
@@ -22,7 +18,6 @@ public class TicTacToe extends BoardGame {
             }
         }
     }
-
 
     public void setOwner(int[] coordinates, Player player) {
         int row = coordinates[0];
@@ -100,17 +95,19 @@ public class TicTacToe extends BoardGame {
     }
 
     /*
-        Arraylist<Cell> cells = new ArrayList<>();
-        cells.get(0).equals(;
-        cells[0];
+     * Arraylist<Cell> cells = new ArrayList<>();
+     * cells.get(0).equals(;
+     * cells[0];
      */
     /**
-     * Retrieves the specific Cell object located at the given row and column indices.
+     * Retrieves the specific Cell object located at the given row and column
+     * indices.
      *
      * @param row the row index of the desired cell (0-based).
      * @param col the column index of the desired cell (0-based).
      * @return the Cell object at the specified row and column.
-     * @throws ArrayIndexOutOfBoundsException if the row or column indices are out of bounds.
+     * @throws ArrayIndexOutOfBoundsException if the row or column indices are out
+     *                                        of bounds.
      */
     public Cell getCell(int row, int col) {
         return cells[row][col];
@@ -119,7 +116,8 @@ public class TicTacToe extends BoardGame {
     /**
      * Returns the entire 2D array of Cell objects representing the game board.
      *
-     * @return a 2D array of Cell objects representing the current state of the board.
+     * @return a 2D array of Cell objects representing the current state of the
+     *         board.
      */
     public Cell[][] getCells() {
         return cells;
