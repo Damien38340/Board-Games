@@ -1,4 +1,5 @@
 package org.example;
+
 import org.example.boardgames.ConnectFour;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
@@ -78,7 +79,7 @@ public class Game {
     }
 
     public void startGomoku() {
- gomoku = new Gomoku();
+        gomoku = new Gomoku();
         view.displayHomePage();
         gomoku.populateTable(); // Prepare the board
         mainMenu();
@@ -91,7 +92,7 @@ public class Game {
                 view.displayBoard(gomoku.getCells()); // Display the board updated after each turn
                 view.playerMessage(currentPlayer); // Display current player's turn
 
-                int[] coordinates = currentPlayer.getCoordinatesFromGomoku(gomoku); //Needs to set a boardgame type
+                int[] coordinates = currentPlayer.getCoordinatesFromGomoku(gomoku); // Needs to set a boardgame type
                 gomoku.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over

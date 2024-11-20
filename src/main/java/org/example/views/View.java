@@ -12,24 +12,23 @@ public class View {
     }
 
     public void displayBoard(Cell[][] cells) {
-        int size = cells.length; // Get the size of the grid (assuming square)
 
         // Generate and display column headers dynamically
         System.out.print("     "); // Leading space for alignment
-        for (int i = 1; i <= size; i++) {
-            System.out.printf("%-5d", i); // Adjust spacing as needed
+        for (int i = 0; i < cells[0].length; i++) {
+            System.out.printf("%-5d", i + 1); // Adjust spacing as needed
         }
         System.out.println();
 
         // Top border
         System.out.print("  ");
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < cells.length; i++) {
             System.out.print("-----"); // Adjust dashes as needed
         }
         System.out.println();
 
         // Display rows with row numbers
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < cells.length; i++) {
             System.out.print((i + 1) + " |"); // Print row number
             for (Cell cell : cells[i]) {
                 System.out.printf("%-4s|", cell.getRepresentation()); // Print cell content with spacing
@@ -38,7 +37,7 @@ public class View {
 
             // Print row separator
             System.out.print("  ");
-            for (int j = 0; j < size; j++) {
+            for (int j = 0; j < cells[i].length; j++) {
                 System.out.print("-----"); // Adjust dashes as needed
             }
             System.out.println();
