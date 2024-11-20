@@ -96,7 +96,7 @@ public class Game {
                 gomoku.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over
-                if (gomoku.checkGameOver(currentPlayer)) {
+                if (gomoku.checkGameOverGomoku(currentPlayer)) {
                     break;
                 }
 
