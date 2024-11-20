@@ -1,8 +1,8 @@
 package org.example.player;
 
-import org.example.TicTacToe;
-
 import java.util.Random;
+
+import org.example.boardgames.TicTacToe;
 
 public class ArtificialPlayer extends Player {
 

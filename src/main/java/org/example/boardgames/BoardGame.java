@@ -1,5 +1,6 @@
-package org.example;
+package org.example.boardgames;
 
+import org.example.player.Cell;
 import org.example.views.View;
 
 public abstract class BoardGame {
