@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.boardgames.ConnectFour;
 import org.example.boardgames.TicTacToe;
 import org.example.player.ArtificialPlayer;
 import org.example.player.HumanPlayer;
@@ -28,22 +29,20 @@ public class Game {
     public void mainMenu() {
         String gameMode = userInteraction.mainMenu(); // Ask the user to select a game mode
         switch (gameMode) {
-            case "1":
-                break;
+            case "1" -> {
+            }
 
-            case "2":
-                secondPlayer = new ArtificialPlayer(" O ", "Awesome-O");
-                break;
+            case "2" -> secondPlayer = new ArtificialPlayer(" O ", "Awesome-O");
 
-            case "3":
+            case "3" -> {
                 firstPlayer = new ArtificialPlayer(" X ", "Awesome-O");
                 secondPlayer = new ArtificialPlayer(" O ", "C-16");
-                break;
+            }
 
-            default:
+            default -> {
                 view.defaultMessage();
                 mainMenu();
-                break;
+            }
         }
     }
 
@@ -73,16 +72,40 @@ public class Game {
 
             } catch (Exception e) {
                 System.err.println("An error occurred during the game: " + e.getMessage());
-                e.printStackTrace();
             }
         }
     }
 
-    public void startGomoku(){
+    public void startGomoku() {
 
     }
 
-    public void startConnectFour(){
+    public void startConnectFour() {
+        ConnectFour connectFour = new ConnectFour();
+        view.displayHomePage();
+        connectFour.populateTable(); // Prepare the board
+        mainMenu();
+        // Configure players based on game mode
+
+        currentPlayer = firstPlayer; // Set the starting player
+
+        try {
+            view.printBasicBoard(connectFour.getCells()); // Display the board updated after each turn
+            // view.playerMessage(currentPlayer); // Display current player's turn
+
+            // int[] coordinates = currentPlayer.getCoordinates(ticTacToe);
+            // ticTacToe.setOwner(coordinates, currentPlayer);
+
+            // // Check if the game is over
+            // if (ticTacToe.checkGameOver(currentPlayer)) {
+            // break;
+
+            // // Switch players
+            // currentPlayer = (currentPlayer == firstPlayer) ? secondPlayer : firstPlayer;
+
+        } catch (Exception e) {
+            System.err.println("An error occurred during the game: " + e.getMessage());
+        }
 
     }
 }
