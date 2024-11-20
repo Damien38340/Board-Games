@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
 import org.example.player.ArtificialPlayer;
 import org.example.player.HumanPlayer;
@@ -11,6 +12,7 @@ public class Game {
     Player firstPlayer;
     Player secondPlayer;
     TicTacToe ticTacToe;
+    Gomoku gomoku;
     UserInteraction userInteraction;
     View view;
 
@@ -79,7 +81,35 @@ public class Game {
     }
 
     public void startGomoku(){
+        gomoku = new Gomoku();
+        view.displayHomePage();
+        gomoku.populateTable(); // Prepare the board
+        mainMenu();
+        // Configure players based on game mode
 
+        currentPlayer = firstPlayer; // Set the starting player
+
+        while (true) {
+            try {
+                view.displayBoard(gomoku.getCells()); // Display the board updated after each turn
+                view.playerMessage(currentPlayer); // Display current player's turn
+
+                int[] coordinates = currentPlayer.getCoordinatesFromGomoku(gomoku); //Needs to set a boardgame type
+                gomoku.setOwner(coordinates, currentPlayer);
+
+                // Check if the game is over
+                if (gomoku.checkGameOver(currentPlayer)) {
+                    break;
+                }
+
+                // Switch players
+                currentPlayer = (currentPlayer == firstPlayer) ? secondPlayer : firstPlayer;
+
+            } catch (Exception e) {
+                System.err.println("An error occurred during the game: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
     }
 
     public void startConnectFour(){

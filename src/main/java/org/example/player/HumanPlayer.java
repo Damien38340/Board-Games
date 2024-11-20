@@ -1,6 +1,8 @@
 package org.example.player;
 
 import org.example.UserInteraction;
+import org.example.boardgames.BoardGame;
+import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
 
 public class HumanPlayer extends Player {
@@ -13,6 +15,12 @@ public class HumanPlayer extends Player {
 
     @Override
     public int[] provideCoordinates(TicTacToe game) {
+        int row = userInteraction.askingRowNumber() - 1;
+        int col = userInteraction.askingColumnNumber() - 1;
+        return new int[]{row, col};
+    }
+
+    public int[] provideCoordinatesFromGomoku(Gomoku game) {
         int row = userInteraction.askingRowNumber() - 1;
         int col = userInteraction.askingColumnNumber() - 1;
         return new int[]{row, col};
