@@ -95,11 +95,6 @@ public class TicTacToe extends BoardGame {
         return size;
     }
 
-    /*
-     * Arraylist<Cell> cells = new ArrayList<>();
-     * cells.get(0).equals(;
-     * cells[0];
-     */
     /**
      * Retrieves the specific Cell object located at the given row and column
      * indices.

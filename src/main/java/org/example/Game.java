@@ -47,7 +47,7 @@ public class Game {
         }
     }
 
-    public void startGame() {
+    public void startTicTacToe() {
         view.displayHomePage();
         ticTacToe.populateTable(); // Prepare the board
         mainMenu();
@@ -76,5 +76,13 @@ public class Game {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void startGomoku(){
+
+    }
+
+    public void startConnectFour(){
+
     }
 }
