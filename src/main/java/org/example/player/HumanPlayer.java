@@ -1,7 +1,7 @@
 package org.example.player;
 
 import org.example.UserInteraction;
-import org.example.TicTacToe;
+import org.example.boardgames.TicTacToe;
 
 public class HumanPlayer extends Player {
 

@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.boardgames.TicTacToe;
 import org.example.player.ArtificialPlayer;
 import org.example.player.HumanPlayer;
 import org.example.player.Player;

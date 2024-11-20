@@ -1,6 +1,6 @@
 package org.example.player;
 
-import org.example.TicTacToe;
+import org.example.boardgames.TicTacToe;
 
 public abstract class Player {
     private final String representation;
