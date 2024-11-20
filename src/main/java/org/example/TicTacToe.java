@@ -3,7 +3,7 @@ package org.example;
 import org.example.player.Player;
 import org.example.views.View;
 
-public class TicTacToe {
+public class TicTacToe extends BoardGame {
 
     private final int size;
     private final Cell[][] cells;
@@ -99,6 +99,11 @@ public class TicTacToe {
         return size;
     }
 
+    /*
+        Arraylist<Cell> cells = new ArrayList<>();
+        cells.get(0).equals(;
+        cells[0];
+     */
     /**
      * Retrieves the specific Cell object located at the given row and column indices.
      *
