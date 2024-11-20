@@ -39,5 +39,7 @@ public class UserInteraction {
         return sc.nextInt();
     }
 
-
+    public int getInputNumberFromPlayer(){
+        return Integer.parseInt(sc.nextLine());
+    }
 }

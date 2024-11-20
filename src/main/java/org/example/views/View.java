@@ -11,6 +11,12 @@ public class View {
         asciiArt.homePage(); // Display the homepage
     }
 
+    // Only on Linux
+    public void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     public void displayBoard(Cell[][] cells) {
 
         System.out.println("   1    2    3"); // Column headers

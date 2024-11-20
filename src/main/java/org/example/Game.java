@@ -88,23 +88,24 @@ public class Game {
         // Configure players based on game mode
 
         currentPlayer = firstPlayer; // Set the starting player
+        while (true) {
+            try {
+                view.displayBoard(connectFour.getCells()); // Display the board updated after each turn
+                // view.playerMessage(currentPlayer); // Display current player's turn
 
-        try {
-            view.displayBoard(connectFour.getCells()); // Display the board updated after each turn
-            // view.playerMessage(currentPlayer); // Display current player's turn
+                int coordinates = currentPlayer.getCoordinatesFromConnectFour();
+                connectFour.setOwner(coordinates, currentPlayer);
 
-            // int[] coordinates = currentPlayer.getCoordinates(ticTacToe);
-            // ticTacToe.setOwner(coordinates, currentPlayer);
+                // // Check if the game is over
+                // if (ticTacToe.checkGameOver(currentPlayer)) {
+                // break;
 
-            // // Check if the game is over
-            // if (ticTacToe.checkGameOver(currentPlayer)) {
-            // break;
+                // // Switch players
+                // currentPlayer = (currentPlayer == firstPlayer) ? secondPlayer : firstPlayer;
 
-            // // Switch players
-            // currentPlayer = (currentPlayer == firstPlayer) ? secondPlayer : firstPlayer;
-
-        } catch (Exception e) {
-            System.err.println("An error occurred during the game: " + e.getMessage());
+            } catch (Exception e) {
+                System.err.println("An error occurred during the game: " + e.getMessage());
+            }
         }
 
     }
