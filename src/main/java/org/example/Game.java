@@ -119,7 +119,7 @@ public class Game {
         currentPlayer = firstPlayer; // Set the starting player
 
         try {
-            view.printBasicBoard(connectFour.getCells()); // Display the board updated after each turn
+            view.displayBoard(connectFour.getCells()); // Display the board updated after each turn
             // view.playerMessage(currentPlayer); // Display current player's turn
 
             // int[] coordinates = currentPlayer.getCoordinates(ticTacToe);
