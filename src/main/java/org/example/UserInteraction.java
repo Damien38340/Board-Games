@@ -10,6 +10,16 @@ public class UserInteraction {
         sc = new Scanner(System.in);
     }
 
+    public String chooseGame(){
+
+        System.out.println("Choose your game");
+        System.out.println("1. Tic Tac Toe");
+        System.out.println("2. Gomoku");
+        System.out.println("3. Connect Four");
+
+        return sc.nextLine();
+    }
+
     public String mainMenu(){
 
         System.out.println("1. Player 1 VS Player 2");
