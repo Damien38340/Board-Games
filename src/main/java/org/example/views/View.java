@@ -22,7 +22,7 @@ public class View {
 
         // Top border
         System.out.print("  ");
-        for (int i = 0; i < cells.length; i++) {
+        for (int i = 0; i < cells[0].length; i++) {
             System.out.print("-----"); // Adjust dashes as needed
         }
         System.out.println();
