@@ -2,7 +2,6 @@ package org.example.player;
 
 import java.util.Random;
 
-import org.example.boardgames.BoardGame;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
 
@@ -14,12 +13,12 @@ public class ArtificialPlayer extends Player {
         super(representation, name);
     }
 
-    public int randomRow() {
-        return random.nextInt(3);
+    public int randomRow(int size) {
+        return random.nextInt(size);
     }
 
-    public int randomCol() {
-        return random.nextInt(3);
+    public int randomCol(int size) {
+        return random.nextInt(size);
     }
 
     @Override
@@ -28,8 +27,8 @@ public class ArtificialPlayer extends Player {
         int row, col;
 
         do {
-            row = randomRow();
-            col = randomCol();
+            row = randomRow(game.getSize());
+            col = randomCol(game.getSize());
 
         } while (!game.getCell(row, col).getRepresentation().equals("   ")); // Ensure AI picks an empty cell
 
@@ -41,8 +40,8 @@ public class ArtificialPlayer extends Player {
         int row, col;
 
         do {
-            row = randomRow();
-            col = randomCol();
+            row = randomRow(game.getSize());
+            col = randomCol(game.getSize());
 
         } while (!game.getCell(row, col).getRepresentation().equals("   ")); // Ensure AI picks an empty cell
 

@@ -7,8 +7,16 @@ public class View {
 
     AsciiArt asciiArt = new AsciiArt();
 
-    public void displayHomePage() {
-        asciiArt.homePage(); // Display the homepage
+    public void displayTicTacToeLogo() {
+        asciiArt.ticTacToeLogo(); // Display the homepage
+    }
+
+    public void displayGomokuLogo() {
+        asciiArt.gomokuLogo();
+    }
+
+    public void displayConnectFourLogo(){
+        asciiArt.connectFourLogo();
     }
 
     // Only on Linux
@@ -61,6 +69,10 @@ public class View {
     public void victoryMessage(Player currentPlayer) {
         System.out.println(currentPlayer.getName() + " won !!");
         asciiArt.victoryArt();
+    }
+
+    public void failureMessage(){
+        asciiArt.failureArt();
     }
 
     public void drawMessage() {
