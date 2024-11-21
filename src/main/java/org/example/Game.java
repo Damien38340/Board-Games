@@ -125,9 +125,13 @@ public class Game {
                 int coordinates = currentPlayer.getCoordinatesFromConnectFour();
                 connectFour.setOwner(coordinates, currentPlayer);
 
-                // // Check if the game is over
-                // if (ticTacToe.checkGameOver(currentPlayer)) {
-                // break;
+                // Check if the game is over
+                if (connectFour.checkGameOver(currentPlayer)) {
+                    view.displayBoard(connectFour.getCells());
+                    view.victoryMessage(currentPlayer);
+                    break;
+
+                }
 
                 // Switch players
                 currentPlayer = (currentPlayer == firstPlayer) ? secondPlayer : firstPlayer;
