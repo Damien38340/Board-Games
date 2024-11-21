@@ -1,10 +1,7 @@
 package org.example.player;
 
-<<<<<<< Updated upstream
-=======
 import org.example.UserInteraction;
 import org.example.boardgames.Gomoku;
->>>>>>> Stashed changes
 import org.example.boardgames.TicTacToe;
 
 public abstract class Player {
@@ -56,8 +53,6 @@ public abstract class Player {
         }
         return coordinates;
     }
-<<<<<<< Updated upstream
-=======
 
     public int[] getCoordinatesFromGomoku(Gomoku game) {
 
@@ -101,5 +96,4 @@ public abstract class Player {
             }
         }
     }
->>>>>>> Stashed changes
 }
