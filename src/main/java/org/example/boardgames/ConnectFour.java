@@ -2,7 +2,8 @@ package org.example.boardgames;
 
 import java.util.concurrent.TimeUnit;
 
-import org.example.player.Cell;
+import org.example.cell.Cell;
+import org.example.cell.State;
 import org.example.player.Player;
 import org.example.views.View;
 
@@ -29,7 +30,7 @@ public class ConnectFour extends BoardGame {
         int j = coordinates;
         while (!isOutOfBounds(i, j) && checkNextCellForEquals(i - 1, j)) {
             animateConnectFour(i, j);
-            cells[i][j].setRepresentation(player.getRepresentation());
+            cells[i][j].setState(player.getState());
             i++;
 
             try {
@@ -110,7 +111,7 @@ public class ConnectFour extends BoardGame {
 
     public void animateConnectFour(int i, int j) {
         if (i != 0) {
-            cells[i - 1][j].setRepresentation("   ");
+            cells[i - 1][j].setState(State.EMPTY);
         }
     }
 

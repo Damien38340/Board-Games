@@ -2,7 +2,7 @@ package org.example.boardgames;
 
 import java.util.concurrent.TimeUnit;
 
-import org.example.player.Cell;
+import org.example.cell.Cell;
 import org.example.player.Player;
 import org.example.views.View;
 
@@ -27,7 +27,7 @@ public class TicTacToe extends BoardGame {
 
         int row = coordinates[0];
         int col = coordinates[1];
-        cells[row][col].setRepresentation(player.getRepresentation());
+        cells[row][col].setState(player.getState());
         try {
             time.sleep(1000);
         } catch (InterruptedException e) {

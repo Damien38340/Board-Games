@@ -7,6 +7,8 @@ import org.example.player.ArtificialPlayer;
 import org.example.player.HumanPlayer;
 import org.example.player.Player;
 import org.example.views.View;
+import org.example.cell.State;
+import org.example.cell.Cell;
 
 public class Game {
     Player currentPlayer;
@@ -19,8 +21,8 @@ public class Game {
 
     public Game() {
         // Initialize players
-        firstPlayer = new HumanPlayer(" 🟩 ", "Player 1 🟩");
-        secondPlayer = new HumanPlayer(" 🟥 ", "Player 2 🟥 ");
+        firstPlayer = new HumanPlayer(State.X, "Player 1 🟩");
+        secondPlayer = new HumanPlayer(State.O, "Player 2 🟥");
 
         // Initialize game components
         view = new View();
@@ -51,11 +53,11 @@ public class Game {
             case "1" -> {
             }
 
-            case "2" -> secondPlayer = new ArtificialPlayer(" 🤖 ", "Awesome-O 🤖");
+            case "2" -> secondPlayer = new ArtificialPlayer(State.O, "Awesome-O");
 
             case "3" -> {
-                firstPlayer = new ArtificialPlayer(" 🤖 ", "Awesome-O 🤖");
-                secondPlayer = new ArtificialPlayer(" 👾 ", "C-16 👾");
+                firstPlayer = new ArtificialPlayer(State.X, "Awesome-O");
+                secondPlayer = new ArtificialPlayer(State.O, "C-16");
             }
 
             default -> {
@@ -125,6 +127,7 @@ public class Game {
 
             } catch (Exception e) {
                 System.err.println("An error occurred during the game: " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }

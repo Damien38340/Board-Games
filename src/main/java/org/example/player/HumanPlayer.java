@@ -4,13 +4,14 @@ import org.example.UserInteraction;
 import org.example.boardgames.ConnectFour;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
+import org.example.cell.State;
 
 public class HumanPlayer extends Player {
 
     UserInteraction userInteraction = new UserInteraction();
 
-    public HumanPlayer(String representation, String name) {
-        super(representation, name);
+    public HumanPlayer(State state, String name) {
+        super(state, name);
     }
 
     @Override
