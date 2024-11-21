@@ -7,5 +7,6 @@ public class Main {
         Game game = new Game();
          game.startGomoku();
 //        game.startConnectFour();
+//        game.startTicTacToe();
     }
 }

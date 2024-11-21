@@ -2,21 +2,27 @@ package org.example.player;
 
 public class Cell {
 
-    enum cellType{
-        EMPTY,
-        X,
-        O
-    }
-
-    private cellType cellT;
-
     private String representation = "   ";
 
-    public String getRepresentation(){
+//    enum CellType{
+//        EMPTY,
+//        X,
+//        O
+//    }
+//
+//    private CellType cellT;
+//
+//    Cell(){
+//        this.cellT = CellType.EMPTY;
+//    }
 
-        //switch(ct){
-//        case empty:
-//            case String "iufi";
+
+    public String getRepresentation(){
+//
+//        switch(this.cellT){
+//        case X: return " X ";
+//            case O: return " 0 ";
+//            default: return "   ";
 
         return this.representation;
     }
@@ -30,4 +36,16 @@ public class Cell {
         this.representation = representation;
     }
 
+//    public void setCellType(CellType cellT){
+//        this.cellT = cellT;
+//    }
+//
+//
+//    public String toString() {
+//        return getRepresentation();
+//    }
+    // public void String getRep(){
+//    return this.state.getValue();}
+
+//    cells[0][0].setRepresentation(CellType.getRepresentation);
 }

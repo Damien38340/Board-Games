@@ -101,37 +101,44 @@ public void populateTable(){
                 }
 
                 // Check vertical win
-                if (i >= 1 && i < size - 1 &&
+                if (i + 4 < size &&
                         current.equals(cells[i + 1][j].getRepresentation()) &&
                         current.equals(cells[i + 2][j].getRepresentation()) &&
-                current.equals(cells[i+3][j].getRepresentation())) {
+                        current.equals(cells[i + 3][j].getRepresentation()) &&
+                        current.equals(cells[i + 4][j].getRepresentation())) {
                     view.displayBoard(cells); // Show the final board
                     view.victoryMessage(currentPlayer);
                     return true;
                 }
 
                 // Check horizontal win
-                if (j >= 1 && j < size - 1 &&
+                if (j + 4 < size &&
                         current.equals(cells[i][j + 1].getRepresentation()) &&
-                        current.equals(cells[i][j + 2].getRepresentation()) && current.equals(cells[i][j + 3].getRepresentation())) {
+                        current.equals(cells[i][j + 2].getRepresentation()) &&
+                        current.equals(cells[i][j + 3].getRepresentation()) &&
+                        current.equals(cells[i][j + 4].getRepresentation())) {
                     view.displayBoard(cells); // Show the final board
                     view.victoryMessage(currentPlayer);
                     return true;
                 }
 
                 // Check main diagonal win
-                if (i >= 1 && i < size - 1 && j >= 1 && j < size - 1 &&
-                        current.equals(cells[i - 1][j - 1].getRepresentation()) &&
-                        current.equals(cells[i - 1][j - 2].getRepresentation()) && current.equals(cells[i - 3][j - 3].getRepresentation())) {
+                if (i + 4 < size && j + 4 < size &&
+                        current.equals(cells[i + 1][j + 1].getRepresentation()) &&
+                        current.equals(cells[i + 2][j + 2].getRepresentation()) &&
+                        current.equals(cells[i + 3][j + 3].getRepresentation()) &&
+                        current.equals(cells[i + 4][j + 4].getRepresentation())) {
                     view.displayBoard(cells); // Show the final board
                     view.victoryMessage(currentPlayer);
                     return true;
                 }
 
                 // Check anti-diagonal win
-                if (i >= 1 && i < size - 1 && j >= 1 && j < size - 1 &&
-                        current.equals(cells[i - 1][j + 1].getRepresentation()) &&
-                        current.equals(cells[i + 1][j - 1].getRepresentation())) {
+                if (i + 4 < size && j - 4 >= 0 &&
+                        current.equals(cells[i + 1][j - 1].getRepresentation()) &&
+                        current.equals(cells[i + 2][j - 2].getRepresentation()) &&
+                        current.equals(cells[i + 3][j - 3].getRepresentation()) &&
+                        current.equals(cells[i + 4][j - 4].getRepresentation())) {
                     view.displayBoard(cells); // Show the final board
                     view.victoryMessage(currentPlayer);
                     return true;
@@ -143,7 +150,7 @@ public void populateTable(){
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (cells[i][j].getRepresentation().equals("   ")) {
-                    return false; // if one of the cells is empty, the game is not over yet
+                    return false; // If one of the cells is empty, the game is not over yet
                 }
             }
         }
