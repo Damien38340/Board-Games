@@ -1,6 +1,6 @@
 package org.example.views;
 
-import org.example.player.Cell;
+import org.example.cell.Cell;
 import org.example.player.Player;
 
 public class View {

@@ -1,6 +1,6 @@
 package org.example.boardgames;
 
-import org.example.player.Cell;
+import org.example.cell.Cell;
 import org.example.player.Player;
 import org.example.views.View;
 
@@ -23,10 +23,10 @@ public class TicTacToe extends BoardGame {
     public void setOwner(int[] coordinates, Player player) {
         int row = coordinates[0];
         int col = coordinates[1];
-        cells[row][col].setRepresentation(player.getRepresentation());
+        cells[row][col].setState(player.getState());
     }
 
-    public boolean checkGameOver(Player currentPlayer) {
+    public boolean checkGameOverTicTacToe(Player currentPlayer) {
         // Check rows, columns, and diagonals for a win
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {

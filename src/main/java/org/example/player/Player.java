@@ -3,18 +3,21 @@ package org.example.player;
 import org.example.boardgames.ConnectFour;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
+import org.example.cell.State;
 
 public abstract class Player {
-    private final String representation;
+
+
+    State state;
     private final String name;
 
-    public Player(String representation, String name) {
-        this.representation = representation;
+    public Player(State state, String name) {
+        this.state = state;
         this.name = name;
     }
 
     public String getRepresentation() {
-        return representation;
+        return state.getValue();
     }
 
     public String getName() {
@@ -96,5 +99,13 @@ public abstract class Player {
                 return column - 1;
             }
         }
+    }
+    public State getState() {
+        return state;
+    }
+
+    @Override
+    public String toString() {
+        return getRepresentation();
     }
 }

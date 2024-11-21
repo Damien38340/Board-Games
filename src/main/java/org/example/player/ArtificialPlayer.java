@@ -5,13 +5,14 @@ import java.util.Random;
 import org.example.boardgames.ConnectFour;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
+import org.example.cell.State;
 
 public class ArtificialPlayer extends Player {
 
     private static final Random random = new Random();
 
-    public ArtificialPlayer(String representation, String name) {
-        super(representation, name);
+    public ArtificialPlayer(State state, String name) {
+        super(state, name);
     }
 
     public int randomRow(int size) {
@@ -36,6 +37,7 @@ public class ArtificialPlayer extends Player {
         return new int[]{row, col};
     }
 
+    @Override
     public int[] provideCoordinatesFromGomoku(Gomoku game) {
 
         int row, col;
@@ -49,6 +51,7 @@ public class ArtificialPlayer extends Player {
         return new int[]{row, col};
     }
 
+    @Override
     public int provideCoordinatesFromConnectFour(ConnectFour game) {
         return random.nextInt(game.getSize())+1;
     }
