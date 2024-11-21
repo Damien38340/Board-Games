@@ -28,17 +28,26 @@ public class Game {
         userInteraction = new UserInteraction();
     }
 
-    public void chooseGameMenu(){
+    public void chooseGameMenu() {
         String chooseGame = userInteraction.chooseGame();
 
-        switch (chooseGame){
-            case "1": startTicTacToe(); break;
+        switch (chooseGame) {
+            case "1":
+                startTicTacToe();
+                break;
 
-            case "2": startGomoku(); break;
+            case "2":
+                startGomoku();
+                break;
 
-            case "3": startConnectFour(); break;
+            case "3":
+                startConnectFour();
+                break;
 
-            default: view.defaultMessage(); chooseGameMenu(); break;
+            default:
+                view.defaultMessage();
+                chooseGameMenu();
+                break;
         }
     }
 
