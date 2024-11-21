@@ -29,7 +29,7 @@ public class Gomoku extends BoardGame {
         int col = coordinates[1];
         cells[row][col].setRepresentation(player.getRepresentation());
         try {
-            time.sleep(500);
+            time.sleep(400);
         } catch (InterruptedException e) {
         }
     }

@@ -1,7 +1,5 @@
 package org.example.views;
 
-import java.util.concurrent.TimeUnit;
-
 import org.example.player.Cell;
 import org.example.player.Player;
 
@@ -28,7 +26,6 @@ public class View {
     }
 
     public void displayBoard(Cell[][] cells) {
-        TimeUnit time = TimeUnit.MILLISECONDS;
         clearScreen();
         // Generate and display column headers dynamically
         System.out.print("     "); // Leading space for alignment
@@ -71,7 +68,7 @@ public class View {
     }
 
     public void victoryMessage(Player currentPlayer) {
-        System.out.println(currentPlayer.getName() + " won !!");
+        System.out.println("\t    " + currentPlayer.getName() + " won !!");
         asciiArt.victoryArt();
     }
 

@@ -32,22 +32,16 @@ public class Game {
         String chooseGame = userInteraction.chooseGame();
         view.clearScreen();
         switch (chooseGame) {
-            case "1":
-                startTicTacToe();
-                break;
+            case "1" -> startTicTacToe();
 
-            case "2":
-                startGomoku();
-                break;
+            case "2" -> startGomoku();
 
-            case "3":
-                startConnectFour();
-                break;
+            case "3" -> startConnectFour();
 
-            default:
+            default -> {
                 view.defaultMessage();
                 chooseGameMenu();
-                break;
+            }
         }
     }
 
@@ -131,7 +125,6 @@ public class Game {
 
             } catch (Exception e) {
                 System.err.println("An error occurred during the game: " + e.getMessage());
-                e.printStackTrace();
             }
         }
     }

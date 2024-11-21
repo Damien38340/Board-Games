@@ -33,9 +33,10 @@ public class ArtificialPlayer extends Player {
 
         } while (!game.getCell(row, col).getRepresentation().equals("   ")); // Ensure AI picks an empty cell
 
-        return new int[]{row, col};
+        return new int[] { row, col };
     }
 
+    @Override
     public int[] provideCoordinatesFromGomoku(Gomoku game) {
 
         int row, col;
@@ -46,10 +47,11 @@ public class ArtificialPlayer extends Player {
 
         } while (!game.getCell(row, col).getRepresentation().equals("   ")); // Ensure AI picks an empty cell
 
-        return new int[]{row, col};
+        return new int[] { row, col };
     }
 
+    @Override
     public int provideCoordinatesFromConnectFour(ConnectFour game) {
-        return random.nextInt(game.getSize())+1;
+        return random.nextInt(game.getSize()) + 1;
     }
 }
