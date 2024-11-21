@@ -49,7 +49,7 @@ public class Game {
     }
 
     public void startTicTacToe() {
-        view.displayHomePage();
+        view.displayTicTacToeLogo();
         ticTacToe.populateTable(); // Prepare the board
         mainMenu();
         // Configure players based on game mode
@@ -80,7 +80,7 @@ public class Game {
 
     public void startGomoku() {
         gomoku = new Gomoku();
-        view.displayHomePage();
+        view.displayTicTacToeLogo();
         gomoku.populateTable(); // Prepare the board
         mainMenu();
         // Configure players based on game mode
@@ -112,7 +112,7 @@ public class Game {
 
     public void startConnectFour() {
         ConnectFour connectFour = new ConnectFour();
-        view.displayHomePage();
+        view.displayTicTacToeLogo();
         connectFour.populateTable(); // Prepare the board
         mainMenu();
         // Configure players based on game mode
