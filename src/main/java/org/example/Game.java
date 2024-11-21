@@ -19,8 +19,8 @@ public class Game {
 
     public Game() {
         // Initialize players
-        firstPlayer = new HumanPlayer(" X ", "Player 1");
-        secondPlayer = new HumanPlayer(" O ", "Player 2");
+        firstPlayer = new HumanPlayer(" 🟩 ", "Player 1 🟩");
+        secondPlayer = new HumanPlayer(" 🟥 ", "Player 2 🟥 ");
 
         // Initialize game components
         view = new View();
@@ -57,11 +57,11 @@ public class Game {
             case "1" -> {
             }
 
-            case "2" -> secondPlayer = new ArtificialPlayer(" O ", "Awesome-O");
+            case "2" -> secondPlayer = new ArtificialPlayer(" 🤖 ", "Awesome-O 🤖");
 
             case "3" -> {
-                firstPlayer = new ArtificialPlayer(" X ", "Awesome-O");
-                secondPlayer = new ArtificialPlayer(" O ", "C-16");
+                firstPlayer = new ArtificialPlayer(" 🤖 ", "Awesome-O 🤖");
+                secondPlayer = new ArtificialPlayer(" 👾 ", "C-16 👾");
             }
 
             default -> {
@@ -89,7 +89,7 @@ public class Game {
                 ticTacToe.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over
-                if (ticTacToe.checkGameOver(currentPlayer)) {
+                if (ticTacToe.checkGameOverTicTacToe(currentPlayer)) {
                     break;
                 }
 

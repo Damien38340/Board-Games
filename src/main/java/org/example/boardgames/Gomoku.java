@@ -1,5 +1,7 @@
 package org.example.boardgames;
 
+import java.util.concurrent.TimeUnit;
+
 import org.example.player.Cell;
 import org.example.player.Player;
 import org.example.views.View;
@@ -21,74 +23,15 @@ public class Gomoku extends BoardGame {
     }
 
     public void setOwner(int[] coordinates, Player player) {
+        TimeUnit time = TimeUnit.MILLISECONDS;
+
         int row = coordinates[0];
         int col = coordinates[1];
         cells[row][col].setRepresentation(player.getRepresentation());
-    }
-
-    public boolean checkGameOver(Player currentPlayer) {
-        // Check rows, columns, and diagonals for a win
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                String current = cells[i][j].getRepresentation();
-
-                // Skip empty cells
-                if (current.equals("   ")) {
-                    continue;
-                }
-
-                // Check vertical win
-                if (i >= 1 && i < size - 1 &&
-                        current.equals(cells[i - 1][j].getRepresentation()) &&
-                        current.equals(cells[i + 1][j].getRepresentation())) {
-                    view.displayBoard(cells); // Show the final board
-                    view.victoryMessage(currentPlayer);
-                    return true;
-                }
-
-                // Check horizontal win
-                if (j >= 1 && j < size - 1 &&
-                        current.equals(cells[i][j - 1].getRepresentation()) &&
-                        current.equals(cells[i][j + 1].getRepresentation())) {
-                    view.displayBoard(cells); // Show the final board
-                    view.victoryMessage(currentPlayer);
-                    return true;
-                }
-
-                // Check main diagonal win
-                if (i >= 1 && i < size - 1 && j >= 1 && j < size - 1 &&
-                        current.equals(cells[i - 1][j - 1].getRepresentation()) &&
-                        current.equals(cells[i + 1][j + 1].getRepresentation())) {
-                    view.displayBoard(cells); // Show the final board
-                    view.victoryMessage(currentPlayer);
-                    return true;
-                }
-
-                // Check anti-diagonal win
-                if (i >= 1 && i < size - 1 && j >= 1 && j < size - 1 &&
-                        current.equals(cells[i - 1][j + 1].getRepresentation()) &&
-                        current.equals(cells[i + 1][j - 1].getRepresentation())) {
-                    view.displayBoard(cells); // Show the final board
-                    view.victoryMessage(currentPlayer);
-                    return true;
-                }
-            }
+        try {
+            time.sleep(500);
+        } catch (InterruptedException e) {
         }
-
-        // Check if the board is full (no empty cells)
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (cells[i][j].getRepresentation().equals("   ")) {
-                    return false; // if one of the cells is empty, the game is not over yet
-                }
-            }
-        }
-
-        // Game over with no winner
-        view.displayBoard(cells); // Show the final board
-        view.drawMessage();
-        view.gameOverMessage();
-        return true;
     }
 
     public boolean checkGameOverGomoku(Player currentPlayer) {
@@ -108,11 +51,11 @@ public class Gomoku extends BoardGame {
                     int count = 0;
 
                     for (int k = 1; k <= 4; k++) {
-                        if (current.equals(cells[i + k][j].getRepresentation()))  {
+                        if (current.equals(cells[i + k][j].getRepresentation())) {
                             count++;
                         }
                     }
-                    if (count == 4){
+                    if (count == 4) {
                         view.displayBoard(cells); // Show the final board
                         view.victoryMessage(currentPlayer);
                         return true;
@@ -124,11 +67,11 @@ public class Gomoku extends BoardGame {
                     int count = 0;
 
                     for (int k = 1; k <= 4; k++) {
-                        if (current.equals(cells[i][j + k].getRepresentation())){
+                        if (current.equals(cells[i][j + k].getRepresentation())) {
                             count++;
                         }
                     }
-                    if (count == 4){
+                    if (count == 4) {
                         view.displayBoard(cells); // Show the final board
                         view.victoryMessage(currentPlayer);
                         return true;
@@ -140,11 +83,11 @@ public class Gomoku extends BoardGame {
                     int count = 0;
 
                     for (int k = 1; k <= 4; k++) {
-                        if (current.equals(cells[i + k][j + k].getRepresentation())){
+                        if (current.equals(cells[i + k][j + k].getRepresentation())) {
                             count++;
                         }
                     }
-                    if (count == 4){
+                    if (count == 4) {
                         view.displayBoard(cells); // Show the final board
                         view.victoryMessage(currentPlayer);
                         return true;
@@ -156,19 +99,20 @@ public class Gomoku extends BoardGame {
                     int count = 0;
 
                     for (int k = 1; k <= 4; k++) {
-                        if (current.equals(cells[i + k][j - k].getRepresentation())){
+                        if (current.equals(cells[i + k][j - k].getRepresentation())) {
                             count++;
                         }
                     }
-                    if (count == 4){
+                    if (count == 4) {
                         view.displayBoard(cells); // Show the final board
                         view.victoryMessage(currentPlayer);
                         return true;
-                    }                }
+                    }
+                }
             }
         }
 
-// Check if the board is full (no empty cells)
+        // Check if the board is full (no empty cells)
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (cells[i][j].
@@ -208,7 +152,7 @@ public class Gomoku extends BoardGame {
      * Returns the entire 2D array of Cell objects representing the game board.
      *
      * @return a 2D array of Cell objects representing the current state of the
-     * board.
+     *         board.
      */
     public Cell[][] getCells() {
         return cells;

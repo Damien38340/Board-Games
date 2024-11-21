@@ -1,5 +1,7 @@
 package org.example.views;
 
+import java.util.concurrent.TimeUnit;
+
 import org.example.player.Cell;
 import org.example.player.Player;
 
@@ -15,7 +17,7 @@ public class View {
         asciiArt.gomokuLogo();
     }
 
-    public void displayConnectFourLogo(){
+    public void displayConnectFourLogo() {
         asciiArt.connectFourLogo();
     }
 
@@ -26,7 +28,8 @@ public class View {
     }
 
     public void displayBoard(Cell[][] cells) {
-
+        TimeUnit time = TimeUnit.MILLISECONDS;
+        clearScreen();
         // Generate and display column headers dynamically
         System.out.print("     "); // Leading space for alignment
         for (int i = 0; i < cells[0].length; i++) {
@@ -37,25 +40,26 @@ public class View {
         // Top border
         System.out.print("  ");
         for (int i = 0; i < cells[0].length; i++) {
-            System.out.print("-----"); // Adjust dashes as needed
+            System.out.print("─────"); // Adjust dashes as needed
         }
         System.out.println();
 
         // Display rows with row numbers
         for (int i = 0; i < cells.length; i++) {
-            System.out.print((i + 1) + " |"); // Print row number
+            System.out.print((i + 1) + " ┃"); // Print row number
             for (Cell cell : cells[i]) {
-                System.out.printf("%-4s|", cell.getRepresentation()); // Print cell content with spacing
+                System.out.printf("%-4s┃", cell.getRepresentation()); // Print cell content with spacing
             }
             System.out.println(); // Move to the next line
 
             // Print row separator
             System.out.print("  ");
             for (int j = 0; j < cells[i].length; j++) {
-                System.out.print("-----"); // Adjust dashes as needed
+                System.out.print("─────"); // Adjust dashes as needed
             }
             System.out.println();
         }
+
     }
 
     public void playerMessage(Player currentPlayer) {
@@ -71,7 +75,7 @@ public class View {
         asciiArt.victoryArt();
     }
 
-    public void failureMessage(){
+    public void failureMessage() {
         asciiArt.failureArt();
     }
 
