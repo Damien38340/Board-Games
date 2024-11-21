@@ -28,6 +28,20 @@ public class Game {
         userInteraction = new UserInteraction();
     }
 
+    public void chooseGameMenu(){
+        String chooseGame = userInteraction.chooseGame();
+
+        switch (chooseGame){
+            case "1": startTicTacToe(); break;
+
+            case "2": startGomoku(); break;
+
+            case "3": startConnectFour(); break;
+
+            default: view.defaultMessage(); chooseGameMenu(); break;
+        }
+    }
+
     public void mainMenu() {
         String gameMode = userInteraction.mainMenu(); // Ask the user to select a game mode
         switch (gameMode) {
@@ -80,7 +94,7 @@ public class Game {
 
     public void startGomoku() {
         gomoku = new Gomoku();
-        view.displayTicTacToeLogo();
+        view.displayGomokuLogo();
         gomoku.populateTable(); // Prepare the board
         mainMenu();
         // Configure players based on game mode
@@ -112,7 +126,7 @@ public class Game {
 
     public void startConnectFour() {
         ConnectFour connectFour = new ConnectFour();
-        view.displayTicTacToeLogo();
+        view.displayConnectFourLogo();
         connectFour.populateTable(); // Prepare the board
         mainMenu();
         // Configure players based on game mode
