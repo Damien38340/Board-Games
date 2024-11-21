@@ -121,7 +121,6 @@ public class Game {
         while (true) {
             try {
                 view.displayBoard(connectFour.getCells()); // Display the board updated after each turn
-                // view.playerMessage(currentPlayer); // Display current player's turn
 
                 int coordinates = currentPlayer.getCoordinatesFromConnectFour();
                 connectFour.setOwner(coordinates, currentPlayer);
@@ -130,8 +129,8 @@ public class Game {
                 // if (ticTacToe.checkGameOver(currentPlayer)) {
                 // break;
 
-                // // Switch players
-                // currentPlayer = (currentPlayer == firstPlayer) ? secondPlayer : firstPlayer;
+                // Switch players
+                currentPlayer = (currentPlayer == firstPlayer) ? secondPlayer : firstPlayer;
 
             } catch (Exception e) {
                 System.err.println("An error occurred during the game: " + e.getMessage());

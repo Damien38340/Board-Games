@@ -24,34 +24,44 @@ public class ConnectFour extends BoardGame {
 
     public void setOwner(int coordinates, Player player) {
         View menu = new View();
-        TimeUnit time = TimeUnit.SECONDS;
+        TimeUnit time = TimeUnit.MILLISECONDS;
+        int i = 0;
+        int j = coordinates;
+        while (!isOutOfBounds(i, j) && checkNextCellForEquals(i - 1, j)) {
+            animateConnectFour(i, j);
+            cells[i][j].setRepresentation(player.getRepresentation());
+            i++;
 
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[0].length; j++) {
-                menu.clearScreen();
-                menu.displayBoard(this.cells);
-                if (j == coordinates && cells[i][j].getRepresentation().equals("   ")) {
-                    cells[i][j].setRepresentation(player.getRepresentation());
-                }
-                if (i != 0 && j == coordinates
-                        && cells[i - 1][j].getRepresentation().equals(cells[i][j].getRepresentation())) {
-                    cells[i - 1][j].setRepresentation("   ");
-                }
-                // if (j == coordinates &&
-                // cells[i][j].getRepresentation().equals(cells[i][j].getRepresentation())) {
-                // cells[i][j].setRepresentation(" ");
-                // }
-
-            }
             try {
-                time.sleep(1);
+                time.sleep(400);
             } catch (InterruptedException e) {
             }
+            menu.clearScreen();
+            menu.displayBoard(this.cells);
         }
         menu.clearScreen();
     }
 
+    public boolean checkGameOver(Player player) {
+
+        return false;
+    }
+
     public Cell[][] getCells() {
         return this.cells;
+    }
+
+    public boolean isOutOfBounds(int i, int j) {
+        return (i < 0 || i > 5 || j < 0 || j > 6);
+    }
+
+    public boolean checkNextCellForEquals(int i, int j) {
+        return i + 1 == 6 || cells[i + 1][j].getRepresentation().equals("   ");
+    }
+
+    public void animateConnectFour(int i, int j) {
+        if (i != 0) {
+            cells[i - 1][j].setRepresentation("   ");
+        }
     }
 }
