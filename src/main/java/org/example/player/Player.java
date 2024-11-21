@@ -1,6 +1,6 @@
 package org.example.player;
 
-import org.example.UserInteraction;
+import org.example.boardgames.ConnectFour;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
 
@@ -24,6 +24,8 @@ public abstract class Player {
     protected abstract int[] provideCoordinates(TicTacToe game);
 
     protected abstract int[] provideCoordinatesFromGomoku(Gomoku game);
+
+    protected abstract int provideCoordinatesFromConnectFour(ConnectFour game);
 
     public int[] getCoordinates(TicTacToe game) {
 
@@ -87,12 +89,9 @@ public abstract class Player {
         return coordinates;
     }
 
-    public int getCoordinatesFromConnectFour() {
-        UserInteraction userInput = new UserInteraction();
-        int column;
+    public int getCoordinatesFromConnectFour(ConnectFour game) {
+        int column = provideCoordinatesFromConnectFour(game);
         while (true) {
-            System.out.println("Please input a column number (1-7):");
-            column = userInput.getInputNumberFromPlayer();
             if (column > 0 || column < 8) {
                 return column - 1;
             }

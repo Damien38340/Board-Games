@@ -2,6 +2,7 @@ package org.example.player;
 
 import java.util.Random;
 
+import org.example.boardgames.ConnectFour;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
 
@@ -46,5 +47,9 @@ public class ArtificialPlayer extends Player {
         } while (!game.getCell(row, col).getRepresentation().equals("   ")); // Ensure AI picks an empty cell
 
         return new int[]{row, col};
+    }
+
+    public int provideCoordinatesFromConnectFour(ConnectFour game) {
+        return random.nextInt(game.getSize())+1;
     }
 }

@@ -113,4 +113,8 @@ public class ConnectFour extends BoardGame {
             cells[i - 1][j].setRepresentation("   ");
         }
     }
+
+    public int getSize(){
+        return size;
+    }
 }

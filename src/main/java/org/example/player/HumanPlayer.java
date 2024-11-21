@@ -1,7 +1,7 @@
 package org.example.player;
 
 import org.example.UserInteraction;
-import org.example.boardgames.BoardGame;
+import org.example.boardgames.ConnectFour;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
 
@@ -25,4 +25,7 @@ public class HumanPlayer extends Player {
         int col = userInteraction.askingColumnNumber() - 1;
         return new int[]{row, col};
     }
+
+    public int provideCoordinatesFromConnectFour(ConnectFour game) {
+return userInteraction.getInputNumberFromPlayer();    }
 }

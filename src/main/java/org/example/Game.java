@@ -150,7 +150,7 @@ public class Game {
             try {
                 view.displayBoard(connectFour.getCells()); // Display the board updated after each turn
 
-                int coordinates = currentPlayer.getCoordinatesFromConnectFour();
+                int coordinates = currentPlayer.getCoordinatesFromConnectFour(connectFour);
                 connectFour.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over
