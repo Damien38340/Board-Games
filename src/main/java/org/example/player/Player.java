@@ -85,4 +85,16 @@ public abstract class Player {
         }
         return coordinates;
     }
+
+    public int getCoordinatesFromConnectFour() {
+        UserInteraction userInput = new UserInteraction();
+        int column;
+        while (true) {
+            System.out.println("Please input a column number (1-7):");
+            column = userInput.getInputNumberFromPlayer();
+            if (column > 0 || column < 8) {
+                return column - 1;
+            }
+        }
+    }
 }
