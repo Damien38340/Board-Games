@@ -30,7 +30,7 @@ public class Game {
 
     public void chooseGameMenu() {
         String chooseGame = userInteraction.chooseGame();
-
+        view.clearScreen();
         switch (chooseGame) {
             case "1":
                 startTicTacToe();
@@ -75,6 +75,7 @@ public class Game {
         view.displayTicTacToeLogo();
         ticTacToe.populateTable(); // Prepare the board
         mainMenu();
+        view.clearScreen();
         // Configure players based on game mode
 
         currentPlayer = firstPlayer; // Set the starting player
@@ -106,6 +107,8 @@ public class Game {
         view.displayGomokuLogo();
         gomoku.populateTable(); // Prepare the board
         mainMenu();
+        view.clearScreen();
+
         // Configure players based on game mode
 
         currentPlayer = firstPlayer; // Set the starting player
@@ -138,6 +141,8 @@ public class Game {
         view.displayConnectFourLogo();
         connectFour.populateTable(); // Prepare the board
         mainMenu();
+        view.clearScreen();
+
         // Configure players based on game mode
 
         currentPlayer = firstPlayer; // Set the starting player
