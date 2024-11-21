@@ -1,5 +1,6 @@
 package org.example.player;
 
+import org.example.UserInteraction;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
 
