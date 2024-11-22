@@ -1,10 +1,14 @@
 package org.example.cell;
 
+/**
+ * 3 different states in the game, we compare the states of the cells
+ * to check winning conditions
+ */
 public enum State {
 
     EMPTY("   "),
-    X(" 🟩 "),
-    O(" 🟥 ");
+    X("\u001B[35m X  \u001B[0m"),
+    O("\u001B[36m O  \u001B[0m");
 
     private final String value;
 

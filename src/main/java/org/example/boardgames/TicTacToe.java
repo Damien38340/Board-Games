@@ -9,14 +9,14 @@ import org.example.views.View;
 public class TicTacToe extends BoardGame {
 
     public TicTacToe() {
-        view = new View();
-        size = 3;
-        cells = new Cell[size][size];
+        this.col = 3;
+        this.row = 3;
+        this.cells = new Cell[row][col];
     }
 
     public void populateTable() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 cells[i][j] = new Cell();
             }
         }
@@ -36,8 +36,8 @@ public class TicTacToe extends BoardGame {
 
     public boolean checkGameOverTicTacToe(Player currentPlayer) {
         // Check rows, columns, and diagonals for a win
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 String current = cells[i][j].getRepresentation();
 
                 // Skip empty cells
@@ -46,7 +46,7 @@ public class TicTacToe extends BoardGame {
                 }
 
                 // Check vertical win
-                if (i >= 1 && i < size - 1 &&
+                if (i >= 1 && i < row - 1 &&
                         current.equals(cells[i - 1][j].getRepresentation()) &&
                         current.equals(cells[i + 1][j].getRepresentation())) {
                     view.displayBoard(cells); // Show the final board
@@ -55,7 +55,7 @@ public class TicTacToe extends BoardGame {
                 }
 
                 // Check horizontal win
-                if (j >= 1 && j < size - 1 &&
+                if (j >= 1 && j < col - 1 &&
                         current.equals(cells[i][j - 1].getRepresentation()) &&
                         current.equals(cells[i][j + 1].getRepresentation())) {
                     view.displayBoard(cells); // Show the final board
@@ -64,7 +64,7 @@ public class TicTacToe extends BoardGame {
                 }
 
                 // Check main diagonal win
-                if (i >= 1 && i < size - 1 && j >= 1 && j < size - 1 &&
+                if (i >= 1 && i < row - 1 && j >= 1 && j < col - 1 &&
                         current.equals(cells[i - 1][j - 1].getRepresentation()) &&
                         current.equals(cells[i + 1][j + 1].getRepresentation())) {
                     view.displayBoard(cells); // Show the final board
@@ -73,7 +73,7 @@ public class TicTacToe extends BoardGame {
                 }
 
                 // Check anti-diagonal win
-                if (i >= 1 && i < size - 1 && j >= 1 && j < size - 1 &&
+                if (i >= 1 && i < row - 1 && j >= 1 && j < col - 1 &&
                         current.equals(cells[i - 1][j + 1].getRepresentation()) &&
                         current.equals(cells[i + 1][j - 1].getRepresentation())) {
                     view.displayBoard(cells); // Show the final board
@@ -84,8 +84,8 @@ public class TicTacToe extends BoardGame {
         }
 
         // Check if the board is full (no empty cells)
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 if (cells[i][j].getRepresentation().equals("   ")) {
                     return false; // if one of the cells is empty, the game is not over yet
                 }
@@ -100,7 +100,7 @@ public class TicTacToe extends BoardGame {
     }
 
     public int getSize() {
-        return size;
+        return row;
     }
 
     /**
@@ -124,7 +124,7 @@ public class TicTacToe extends BoardGame {
      *         board.
      */
     public Cell[][] getCells() {
-        return cells;
+        return this.cells;
     }
 
 }

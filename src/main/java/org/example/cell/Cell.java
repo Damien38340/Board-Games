@@ -5,7 +5,7 @@ public class Cell {
     State state;
 
     public Cell() {
-        this.state = state.EMPTY;
+        this.state = State.EMPTY;
     }
 
     public State getState() {
@@ -14,7 +14,6 @@ public class Cell {
 
     public String getRepresentation() {
         return this.state.getValue();
-
     }
 
     public void setState(State state) {
@@ -22,7 +21,6 @@ public class Cell {
     }
 
     public String toString() {
-
         return getRepresentation();
     }
 

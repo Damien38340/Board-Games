@@ -9,15 +9,16 @@ import org.example.views.View;
 
 public class ConnectFour extends BoardGame {
 
+
     public ConnectFour() {
-        view = new View();
-        size = 7;
-        cells = new Cell[6][7];
+        this.row = 6;
+        this.col = 7;
+        this.cells = new Cell[row][col];
     }
 
     public void populateTable() {
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 cells[i][j] = new Cell();
             }
         }
@@ -44,54 +45,36 @@ public class ConnectFour extends BoardGame {
     }
 
     public boolean checkGameOver(Player player) {
-        int checkWinningRows = 0;
-        int checkWinningCols = 0;
-        int checkWinningDiagOne = 0;
-        int checkWinningDiagTwo = 0;
+        int[] successiveTiles = {0, 0, 0, 0}; //Row, Col, Diag, AntiDiag
 
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[0].length; j++) {
                 for (int k = 0; k < 4; k++) {
-                    // Checks rows and columns
-                    if (!isOutOfBounds(i, j + k) && !checkForEmptyCell(i, j + k, cells)
-                            && cells[i][k].getRepresentation().equals(cells[i][k + 1].getRepresentation())) {
-                        checkWinningRows++;
+                    if (checkHorizontalWin(i, j, k)) {
+                        successiveTiles[0] += 1;
                     }
-                    if (!isOutOfBounds(i + k, j) && !checkForEmptyCell(i + k, j, cells)
-                            && cells[k][j].getRepresentation().equals(cells[k + 1][j].getRepresentation())) {
-                        checkWinningCols++;
+                    if (checkVerticalWin(i, j, k)) {
+                        successiveTiles[1] += 1;
                     }
-
-                    // Checks diagonals
-                    if (!isOutOfBounds(i + k + 1, j + k + 1) && !checkForEmptyCell(i + k, j + k, cells)
-                            && cells[i + k][j + k].getRepresentation()
-                                    .equals(cells[i + k + 1][j + k + 1].getRepresentation())) {
-                        checkWinningDiagTwo++;
+                    if (checkDiagonalWin(i, j, k)) {
+                        successiveTiles[2] += 1;
                     }
-
-                    // Anti diagonal
-                    if (!isOutOfBounds(i + k + 1, j - k - 1) && !checkForEmptyCell(i + k, j - k, cells)
-                            && cells[i + k][j - k].getRepresentation()
-                                    .equals(cells[i + k + 1][j - k - 1].getRepresentation())) {
-                        checkWinningDiagOne++;
-                    }
-
-                    if (checkWinningRows == 3 || checkWinningCols == 3 || checkWinningDiagOne == 3
-                            || checkWinningDiagTwo == 3) {
-                        return true;
+                    if (checkAntiDiagonalWin(i, j, k)) {
+                        successiveTiles[3] += 1;
                     }
                 }
-                // System.out.println(checkWinningRows + ": " + cells[i][j].getRepresentation()
-                // + "at index(" + i
-                // + ", " + j + ")");
-                checkWinningRows = 0;
-                checkWinningCols = 0;
-                checkWinningDiagOne = 0;
-                checkWinningDiagTwo = 0;
+                for( int x = 0; x < 4; x++ ) {
+                    if(successiveTiles[x] == 3) {
+                        return true;
+                    }
+                    successiveTiles[x] = 0; // resets win condition
+                }
+
             }
         }
         return false;
     }
+
 
     public Cell[][] getCells() {
         return this.cells;
@@ -116,6 +99,22 @@ public class ConnectFour extends BoardGame {
     }
 
     public int getSize(){
-        return size;
+        return row;
+    }
+
+    private boolean checkHorizontalWin(int i, int j, int k){
+        return (!isOutOfBounds(i, j + k) && !checkForEmptyCell(i, j + k, cells) && cells[i][k].getRepresentation().equals(cells[i][k + 1].getRepresentation()));
+    }
+
+    private boolean checkVerticalWin(int i, int j, int k){
+        return (!isOutOfBounds(i + k, j) && !checkForEmptyCell(i + k, j, cells) && cells[k][j].getRepresentation().equals(cells[k + 1][j].getRepresentation()));
+    }
+
+    private boolean checkDiagonalWin(int i, int j, int k){
+        return (!isOutOfBounds(i + k + 1, j + k + 1) && !checkForEmptyCell(i + k, j + k, cells) && cells[i + k][j + k].getRepresentation().equals(cells[i + k + 1][j + k + 1].getRepresentation()));
+    }
+
+    private boolean checkAntiDiagonalWin(int i, int j, int k){
+        return (!isOutOfBounds(i + k + 1, j - k - 1) && !checkForEmptyCell(i + k, j - k, cells) && cells[i + k][j - k].getRepresentation().equals(cells[i + k + 1][j - k - 1].getRepresentation()));
     }
 }

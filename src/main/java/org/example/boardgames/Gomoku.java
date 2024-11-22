@@ -4,19 +4,21 @@ import java.util.concurrent.TimeUnit;
 
 import org.example.cell.Cell;
 import org.example.player.Player;
-import org.example.views.View;
+import org.example.cell.State;
+
 
 public class Gomoku extends BoardGame {
 
     public Gomoku() {
-        view = new View();
-        size = 15;
-        cells = new Cell[size][size];
+        this.col = 15;
+        this.row = 15;
+        this.cells = new Cell[row][col];
     }
 
     public void populateTable() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        System.out.println(row + " " + col);
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 cells[i][j] = new Cell();
             }
         }
@@ -37,87 +39,40 @@ public class Gomoku extends BoardGame {
 
     public boolean checkGameOverGomoku(Player currentPlayer) {
         // Check rows, columns, and diagonals for a win
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
 
-                String current = cells[i][j].getRepresentation();
+                State current = cells[i][j].getState();
 
                 // Skip empty cells
-                if (current.equals("   ")) {
+                if (current == State.EMPTY) {
                     continue;
                 }
 
-                // Check vertical win
-                if (i + 4 < size) {
-                    int count = 0;
-
-                    for (int k = 1; k <= 4; k++) {
-                        if (current.equals(cells[i + k][j].getRepresentation()))  {
-                            count++;
-                        }
-                    }
-                    if (count == 4){
-                        view.displayBoard(cells); // Show the final board
-                        view.victoryMessage(currentPlayer);
-                        return true;
-                    }
+                if (checkVerticalWinGomoku(current, currentPlayer, i, j)) {
+                    return true;
                 }
 
-                // Check horizontal win
-                if (j + 4 < size) {
-                    int count = 0;
-
-                    for (int k = 1; k <= 4; k++) {
-                        if (current.equals(cells[i][j + k].getRepresentation())){
-                            count++;
-                        }
-                    }
-                    if (count == 4){
-                        view.displayBoard(cells); // Show the final board
-                        view.victoryMessage(currentPlayer);
-                        return true;
-                    }
+                if (checkHorizontalWinGomoku(current, currentPlayer, i, j)) {
+                    return true;
                 }
 
-                // Check main diagonal win
-                if (i + 4 < size && j + 4 < size) {
-                    int count = 0;
-
-                    for (int k = 1; k <= 4; k++) {
-                        if (current.equals(cells[i + k][j + k].getRepresentation())){
-                            count++;
-                        }
-                    }
-                    if (count == 4){
-                        view.displayBoard(cells); // Show the final board
-                        view.victoryMessage(currentPlayer);
-                        return true;
-                    }
+                if (checkDiagonalWinGomoku(current, currentPlayer, i, j)) {
+                    return true;
                 }
 
-                // Check anti-diagonal win
-                if (i + 4 < size && j - 4 >= 0) {
-                    int count = 0;
-
-                    for (int k = 1; k <= 4; k++) {
-                        if (current.equals(cells[i + k][j - k].getRepresentation())){
-                            count++;
-                        }
-                    }
-                    if (count == 4){
-                        view.displayBoard(cells); // Show the final board
-                        view.victoryMessage(currentPlayer);
-                        return true;
-                    }                }
+                if (checkAntiDiagonalWinGomoku(current, currentPlayer, i, j)) {
+                    return true;
+                }
             }
         }
 
 // Check if the board is full (no empty cells)
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 if (cells[i][j].
 
-                        getRepresentation().equals("   ")) {
+                        getState() == State.EMPTY) {
                     return false; // If one of the cells is empty, the game is not over yet
                 }
             }
@@ -130,8 +85,80 @@ public class Gomoku extends BoardGame {
         return true;
     }
 
+    public boolean checkVerticalWinGomoku(State current, Player currentPlayer, int i, int j) {
+        if (i + 4 < row) {
+            int count = 0;
+
+            for (int k = 1; k <= 4; k++) {
+                if (current.equals(cells[i + k][j].getState())) {
+                    count++;
+                }
+            }
+            if (count == 4) {
+                view.displayBoard(cells); // Show the final board
+                view.victoryMessage(currentPlayer);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkHorizontalWinGomoku(State current, Player currentPlayer, int i, int j) {
+        if (j + 4 < col) {
+            int count = 0;
+
+            for (int k = 1; k <= 4; k++) {
+                if (current.equals(cells[i][j + k].getState())) {
+                    count++;
+                }
+            }
+            if (count == 4) {
+                view.displayBoard(cells); // Show the final board
+                view.victoryMessage(currentPlayer);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkDiagonalWinGomoku(State current, Player currentPlayer, int i, int j) {
+        if (i + 4 < row && j + 4 < col) {
+            int count = 0;
+
+            for (int k = 1; k <= 4; k++) {
+                if (current.equals(cells[i + k][j + k].getState())) {
+                    count++;
+                }
+            }
+            if (count == 4) {
+                view.displayBoard(cells); // Show the final board
+                view.victoryMessage(currentPlayer);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkAntiDiagonalWinGomoku(State current, Player currentPlayer, int i, int j) {
+        if (i + 4 < row && j - 4 >= 0) {
+            int count = 0;
+
+            for (int k = 1; k <= 4; k++) {
+                if (current.equals(cells[i + k][j - k].getState())) {
+                    count++;
+                }
+            }
+            if (count == 4) {
+                view.displayBoard(cells); // Show the final board
+                view.victoryMessage(currentPlayer);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getSize() {
-        return size;
+        return row;
     }
 
     /**
@@ -155,7 +182,7 @@ public class Gomoku extends BoardGame {
      * board.
      */
     public Cell[][] getCells() {
-        return cells;
+        return this.cells;
     }
 
 }

@@ -8,25 +8,21 @@ import org.example.player.HumanPlayer;
 import org.example.player.Player;
 import org.example.views.View;
 import org.example.cell.State;
-import org.example.cell.Cell;
 
 public class Game {
     Player currentPlayer;
     Player firstPlayer;
     Player secondPlayer;
-    TicTacToe ticTacToe;
-    Gomoku gomoku;
     UserInteraction userInteraction;
     View view;
 
     public Game() {
         // Initialize players
-        firstPlayer = new HumanPlayer(State.X, "Player 1 🟩");
-        secondPlayer = new HumanPlayer(State.O, "Player 2 🟥");
+        firstPlayer = new HumanPlayer(State.X, "\u001B[35m Player 1 \u001B[0m");
+        secondPlayer = new HumanPlayer(State.O, "\u001B[36m Player 2 \u001B[0m");
 
         // Initialize game components
         view = new View();
-        ticTacToe = new TicTacToe();
         userInteraction = new UserInteraction();
     }
 
@@ -53,11 +49,11 @@ public class Game {
             case "1" -> {
             }
 
-            case "2" -> secondPlayer = new ArtificialPlayer(State.O, "Awesome-O");
+            case "2" -> secondPlayer = new ArtificialPlayer(State.O, "\u001B[36m O \u001B[0mAwesome-O");
 
             case "3" -> {
-                firstPlayer = new ArtificialPlayer(State.X, "Awesome-O");
-                secondPlayer = new ArtificialPlayer(State.O, "C-16");
+                firstPlayer = new ArtificialPlayer(State.X, "\u001B[35m Awesome-O \u001B[0m");
+                secondPlayer = new ArtificialPlayer(State.O, "\u001B[36m C-16 \u001B[0m");
             }
 
             default -> {
@@ -68,8 +64,9 @@ public class Game {
     }
 
     public void startTicTacToe() {
-        view.displayTicTacToeLogo();
+        TicTacToe ticTacToe = new TicTacToe();
         ticTacToe.populateTable(); // Prepare the board
+        view.displayTicTacToeLogo();
         mainMenu();
         view.clearScreen();
         // Configure players based on game mode
@@ -99,9 +96,10 @@ public class Game {
     }
 
     public void startGomoku() {
-        gomoku = new Gomoku();
-        view.displayGomokuLogo();
+        Gomoku gomoku = new Gomoku();
         gomoku.populateTable(); // Prepare the board
+
+        view.displayGomokuLogo();
         mainMenu();
         view.clearScreen();
 
@@ -134,8 +132,8 @@ public class Game {
 
     public void startConnectFour() {
         ConnectFour connectFour = new ConnectFour();
-        view.displayConnectFourLogo();
         connectFour.populateTable(); // Prepare the board
+        view.displayConnectFourLogo();
         mainMenu();
         view.clearScreen();
 
@@ -145,6 +143,7 @@ public class Game {
         while (true) {
             try {
                 view.displayBoard(connectFour.getCells()); // Display the board updated after each turn
+                view.playerMessage(currentPlayer); // Display current player's turn
 
                 int coordinates = currentPlayer.getCoordinatesFromConnectFour(connectFour);
                 connectFour.setOwner(coordinates, currentPlayer);
@@ -154,7 +153,6 @@ public class Game {
                     view.displayBoard(connectFour.getCells());
                     view.victoryMessage(currentPlayer);
                     break;
-
                 }
 
                 // Switch players
