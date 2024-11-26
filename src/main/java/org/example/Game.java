@@ -78,7 +78,7 @@ public class Game {
                 view.displayBoard(ticTacToe.getCells()); // Display the board updated after each turn
                 view.playerMessage(currentPlayer); // Display current player's turn
 
-                int[] coordinates = currentPlayer.getCoordinates(ticTacToe);
+                int[] coordinates = currentPlayer.getCoordinatesFromTicTacToe(ticTacToe);
                 ticTacToe.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over

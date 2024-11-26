@@ -15,7 +15,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public int[] provideCoordinates(TicTacToe game) {
+    public int[] provideCoordinatesFromTicTacToe(TicTacToe game) {
         int row = userInteraction.askingRowNumber() - 1;
         int col = userInteraction.askingColumnNumber() - 1;
         return new int[]{row, col};

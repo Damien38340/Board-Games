@@ -3,6 +3,7 @@ package org.example.boardgames;
 import java.util.concurrent.TimeUnit;
 
 import org.example.cell.Cell;
+import org.example.cell.State;
 import org.example.player.Player;
 import org.example.views.View;
 
@@ -38,17 +39,17 @@ public class TicTacToe extends BoardGame {
         // Check rows, columns, and diagonals for a win
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                String current = cells[i][j].getRepresentation();
+                State currentState = cells[i][j].getState();
 
                 // Skip empty cells
-                if (current.equals("   ")) {
+                if (currentState == State.EMPTY) {
                     continue;
                 }
 
                 // Check vertical win
                 if (i >= 1 && i < row - 1 &&
-                        current.equals(cells[i - 1][j].getRepresentation()) &&
-                        current.equals(cells[i + 1][j].getRepresentation())) {
+                        currentState.equals(cells[i - 1][j].getState()) &&
+                        currentState.equals(cells[i + 1][j].getState())) {
                     view.displayBoard(cells); // Show the final board
                     view.victoryMessage(currentPlayer);
                     return true;
@@ -56,8 +57,8 @@ public class TicTacToe extends BoardGame {
 
                 // Check horizontal win
                 if (j >= 1 && j < col - 1 &&
-                        current.equals(cells[i][j - 1].getRepresentation()) &&
-                        current.equals(cells[i][j + 1].getRepresentation())) {
+                        currentState.equals(cells[i][j - 1].getState()) &&
+                        currentState.equals(cells[i][j + 1].getState())) {
                     view.displayBoard(cells); // Show the final board
                     view.victoryMessage(currentPlayer);
                     return true;
@@ -65,8 +66,8 @@ public class TicTacToe extends BoardGame {
 
                 // Check main diagonal win
                 if (i >= 1 && i < row - 1 && j >= 1 && j < col - 1 &&
-                        current.equals(cells[i - 1][j - 1].getRepresentation()) &&
-                        current.equals(cells[i + 1][j + 1].getRepresentation())) {
+                        currentState.equals(cells[i - 1][j - 1].getState()) &&
+                        currentState.equals(cells[i + 1][j + 1].getState())) {
                     view.displayBoard(cells); // Show the final board
                     view.victoryMessage(currentPlayer);
                     return true;
@@ -74,8 +75,8 @@ public class TicTacToe extends BoardGame {
 
                 // Check anti-diagonal win
                 if (i >= 1 && i < row - 1 && j >= 1 && j < col - 1 &&
-                        current.equals(cells[i - 1][j + 1].getRepresentation()) &&
-                        current.equals(cells[i + 1][j - 1].getRepresentation())) {
+                        currentState.equals(cells[i - 1][j + 1].getState()) &&
+                        currentState.equals(cells[i + 1][j - 1].getState())) {
                     view.displayBoard(cells); // Show the final board
                     view.victoryMessage(currentPlayer);
                     return true;
@@ -86,7 +87,7 @@ public class TicTacToe extends BoardGame {
         // Check if the board is full (no empty cells)
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                if (cells[i][j].getRepresentation().equals("   ")) {
+                if (cells[i][j].getState() == State.EMPTY) {
                     return false; // if one of the cells is empty, the game is not over yet
                 }
             }

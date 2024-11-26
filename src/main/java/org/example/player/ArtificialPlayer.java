@@ -24,7 +24,7 @@ public class ArtificialPlayer extends Player {
     }
 
     @Override
-    public int[] provideCoordinates(TicTacToe game) {
+    public int[] provideCoordinatesFromTicTacToe(TicTacToe game) {
 
         int row, col;
 

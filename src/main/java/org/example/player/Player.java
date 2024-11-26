@@ -29,20 +29,20 @@ public abstract class Player {
         return name;
     }
 
-    protected abstract int[] provideCoordinates(TicTacToe game);
+    protected abstract int[] provideCoordinatesFromTicTacToe(TicTacToe game);
 
     protected abstract int[] provideCoordinatesFromGomoku(Gomoku game);
 
     protected abstract int provideCoordinatesFromConnectFour(ConnectFour game);
 
-    public int[] getCoordinates(TicTacToe game) {
+    public int[] getCoordinatesFromTicTacToe(TicTacToe game) {
 
         int[] coordinates;
         int row, col;
 
         while (true) {
             try {
-                coordinates = provideCoordinates(game);
+                coordinates = provideCoordinatesFromTicTacToe(game);
                 row = coordinates[0];
                 col = coordinates[1];
 

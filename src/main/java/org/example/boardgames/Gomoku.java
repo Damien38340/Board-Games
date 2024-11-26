@@ -42,26 +42,26 @@ public class Gomoku extends BoardGame {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
 
-                State current = cells[i][j].getState();
+                State currentState = cells[i][j].getState();
 
                 // Skip empty cells
-                if (current == State.EMPTY) {
+                if (currentState == State.EMPTY) {
                     continue;
                 }
 
-                if (checkVerticalWinGomoku(current, currentPlayer, i, j)) {
+                if (checkVerticalWinGomoku(currentState, currentPlayer, i, j)) {
                     return true;
                 }
 
-                if (checkHorizontalWinGomoku(current, currentPlayer, i, j)) {
+                if (checkHorizontalWinGomoku(currentState, currentPlayer, i, j)) {
                     return true;
                 }
 
-                if (checkDiagonalWinGomoku(current, currentPlayer, i, j)) {
+                if (checkDiagonalWinGomoku(currentState, currentPlayer, i, j)) {
                     return true;
                 }
 
-                if (checkAntiDiagonalWinGomoku(current, currentPlayer, i, j)) {
+                if (checkAntiDiagonalWinGomoku(currentState, currentPlayer, i, j)) {
                     return true;
                 }
             }
