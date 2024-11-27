@@ -2,6 +2,7 @@ package org.example.controller.player;
 
 import org.example.model.boardgames.BoardGame;
 import org.example.model.cell.State;
+import org.example.views.View;
 
 public abstract class Player {
 
@@ -24,7 +25,8 @@ public abstract class Player {
 
     protected abstract int[] provideCoordinates(BoardGame game);
 
-    public int[] getCoordinatesFromTicTacToe(BoardGame game) {
+    public int[] getCoordinates(BoardGame game) {
+        View view = new View();
 
         int[] coordinates;
         int row, col;
@@ -36,65 +38,25 @@ public abstract class Player {
                 col = coordinates[1];
 
                 if (row < 0 || row >= game.getSize() || col < 0 || col >= game.getSize()) {
-                    System.out.println("Invalid row or column number. Please try again.");
+                    view.invalidRowOrCol();
                 }
                 // Validate if the cell is empty
                 else if (game.getCell(row, col).getState() != State.EMPTY) {
-                    System.out.println("Cell is already occupied. Please choose an empty cell.");
+                    view.cellAlreadyOccupied();
                 }
                 // If valid, return the coordinates
                 else {
                     break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter valid numbers.");
+//                System.err.println("Invalid input. Please enter valid numbers.");
             } catch (Exception e) {
-                System.out.println("An unexpected error occurred: " + e.getMessage());
+//                System.err.println("An unexpected error occurred: " + e.getMessage());
             }
         }
         return coordinates;
     }
 
-    public int[] getCoordinatesFromGomoku(BoardGame game) {
-
-        int[] coordinates;
-        int row, col;
-
-        while (true) {
-            try {
-                coordinates = provideCoordinates(game);
-                row = coordinates[0];
-                col = coordinates[1];
-
-                if (row < 0 || row >= game.getSize() || col < 0 || col >= game.getSize()) {
-                    System.out.println("Invalid row or column number. Please try again.");
-                }
-                // Validate if the cell is empty
-                else if (game.getCell(row, col).getState() != State.EMPTY) {
-                    System.out.println("Cell is already occupied. Please choose an empty cell.");
-                }
-                // If valid, return the coordinates
-                else {
-                    break;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter valid numbers.");
-            } catch (Exception e) {
-                System.out.println("An unexpected error occurred: " + e.getMessage());
-            }
-        }
-        return coordinates;
-    }
-
-    public int[] getCoordinatesFromConnectFour(BoardGame game) {
-        int[] coordinates = provideCoordinates(game);
-        while (true) {
-            if (coordinates[0] > 0 || coordinates[0] < 8) {
-                coordinates = new int[]{(coordinates[0] - 1), coordinates[1]};
-                return coordinates;
-            }
-        }
-    }
     public State getState() {
         return state;
     }

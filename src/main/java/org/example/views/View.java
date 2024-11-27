@@ -7,19 +7,6 @@ public class View {
 
     AsciiArt asciiArt = new AsciiArt();
 
-
-    public void displayTicTacToeLogo() {
-        asciiArt.ticTacToeLogo(); // Display the homepage
-    }
-
-    public void displayGomokuLogo() {
-        asciiArt.gomokuLogo();
-    }
-
-    public void displayConnectFourLogo() {
-        asciiArt.connectFourLogo();
-    }
-
     // Only on Linux
     public void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -79,6 +66,14 @@ public class View {
 
     public void defaultMessage() {
         System.out.println("\n Invalid choice, please select a valid option.");
+    }
+
+    public void invalidRowOrCol() {
+        System.out.println("Invalid row or column number. Please try again.");
+    }
+
+    public void cellAlreadyOccupied() {
+        System.out.println("Cell is already occupied. Please choose an empty cell.");
     }
 
 }

@@ -8,6 +8,7 @@ import org.example.model.boardgames.TicTacToe;
 import org.example.controller.player.ArtificialPlayer;
 import org.example.controller.player.HumanPlayer;
 import org.example.controller.player.Player;
+import org.example.views.AsciiArt;
 import org.example.views.View;
 import org.example.model.cell.State;
 
@@ -17,6 +18,10 @@ public class Game {
     Player secondPlayer;
     UserInteraction userInteraction;
     View view;
+    BoardGame ticTacToe;
+    BoardGame gomoku;
+    BoardGame connectFour;
+
 
     public Game() {
         // Initialize players
@@ -26,17 +31,21 @@ public class Game {
         // Initialize game components
         view = new View();
         userInteraction = new UserInteraction();
+        ticTacToe = new TicTacToe();
+        gomoku = new Gomoku();
+        connectFour = new ConnectFour();
+
     }
 
     public void chooseGameMenu() {
         String chooseGame = userInteraction.chooseGame();
         view.clearScreen();
         switch (chooseGame) {
-            case "1" -> startTicTacToe();
+            case "1" -> startGame(ticTacToe);
 
-            case "2" -> startGomoku();
+            case "2" -> startGame(gomoku);
 
-            case "3" -> startConnectFour();
+            case "3" -> startGame(connectFour);
 
             default -> {
                 view.defaultMessage();
@@ -65,10 +74,10 @@ public class Game {
         }
     }
 
-    public void startTicTacToe() {
-        BoardGame ticTacToe = new TicTacToe();
-        ticTacToe.populateTable(); // Prepare the board
-        view.displayTicTacToeLogo();
+
+    public void startGame(BoardGame game) {
+        game.populateTable(); // Prepare the board
+        chooseLogo(game);
         mainMenu();
         view.clearScreen();
         // Configure players based on game mode
@@ -77,19 +86,18 @@ public class Game {
 
         while (true) {
             try {
-                view.displayBoard(ticTacToe.getCells()); // Display the board updated after each turn
+                view.displayBoard(game.getCells()); // Display the board updated after each turn
                 view.playerMessage(currentPlayer); // Display current player's turn
 
-                int[] coordinates = currentPlayer.getCoordinatesFromTicTacToe(ticTacToe);
-                ticTacToe.setOwner(coordinates, currentPlayer);
+                int[] coordinates = currentPlayer.getCoordinates(game);
+                game.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over
-                if (ticTacToe.isOver(currentPlayer)) {
-                    view.displayBoard(ticTacToe.getCells());
+                if (game.isOver(currentPlayer)) {
+                    view.displayBoard(game.getCells());
                     view.victoryMessage(currentPlayer);
                     break;
-                }
-                else if (isDraw(ticTacToe)){
+                } else if (isDraw(game)) {
                     break;
                 }
 
@@ -102,84 +110,6 @@ public class Game {
         }
     }
 
-    public void startGomoku() {
-        BoardGame gomoku = new Gomoku();
-        gomoku.populateTable(); // Prepare the board
-
-        view.displayGomokuLogo();
-        mainMenu();
-        view.clearScreen();
-
-        // Configure players based on game mode
-
-        currentPlayer = firstPlayer; // Set the starting player
-
-        while (true) {
-            try {
-                view.displayBoard(gomoku.getCells()); // Display the board updated after each turn
-                view.playerMessage(currentPlayer); // Display current player's turn
-
-                int[] coordinates = currentPlayer.getCoordinatesFromGomoku(gomoku); // Needs to set a boardgame type
-                gomoku.setOwner(coordinates, currentPlayer);
-
-                // Check if the game is over
-                if (gomoku.isOver(currentPlayer)) {
-                    view.displayBoard(gomoku.getCells());
-                    view.victoryMessage(currentPlayer);
-                    break;
-                }
-                else if (isDraw(gomoku)){
-                    break;
-                }
-
-                // Switch players
-                currentPlayer = (currentPlayer == firstPlayer) ? secondPlayer : firstPlayer;
-
-            } catch (Exception e) {
-                System.err.println("An error occurred during the game: " + e.getMessage());
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void startConnectFour() {
-        BoardGame connectFour = new ConnectFour();
-        connectFour.populateTable(); // Prepare the board
-        view.displayConnectFourLogo();
-        mainMenu();
-        view.clearScreen();
-
-        // Configure players based on game mode
-
-        currentPlayer = firstPlayer; // Set the starting player
-        while (true) {
-            try {
-                view.displayBoard(connectFour.getCells()); // Display the board updated after each turn
-                view.playerMessage(currentPlayer); // Display current player's turn
-
-                int[] coordinates = currentPlayer.getCoordinatesFromConnectFour(connectFour);
-                connectFour.setOwner(coordinates, currentPlayer);
-
-                // Check if the game is over
-                if (connectFour.isOver(currentPlayer)) {
-                    view.displayBoard(connectFour.getCells());
-                    view.victoryMessage(currentPlayer);
-                    break;
-                }
-
-                else if (isDraw(connectFour)){
-                    break;
-                }
-
-                // Switch players
-                currentPlayer = (currentPlayer == firstPlayer) ? secondPlayer : firstPlayer;
-
-            } catch (Exception e) {
-                System.err.println("An error occurred during the game: " + e.getMessage());
-            }
-        }
-
-    }
     public boolean isDraw(BoardGame game) {
         for (int i = 0; i < game.getSize(); i++) {
             for (int j = 0; j < game.getSize(); j++) {
@@ -194,5 +124,20 @@ public class Game {
         view.drawMessage();
         view.gameOverMessage();
         return true;
+    }
+
+    public void chooseLogo(BoardGame game) {
+        AsciiArt asciiArt = new AsciiArt();
+
+        if (game instanceof TicTacToe) {
+            asciiArt.ticTacToeLogo();
+        } else if (game instanceof Gomoku) {
+            asciiArt.gomokuLogo();
+        } else if (game instanceof ConnectFour) {
+            asciiArt.connectFourLogo();
+        }
+        else {
+            view.defaultMessage();
+        }
     }
 }

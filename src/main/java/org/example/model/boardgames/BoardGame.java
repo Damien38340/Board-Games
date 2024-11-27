@@ -3,7 +3,7 @@ package org.example.model.boardgames;
 import org.example.model.cell.Cell;
 import org.example.model.cell.State;
 import org.example.controller.player.Player;
-import org.example.views.View;
+
 
 public abstract class BoardGame {
     protected String name;
@@ -11,7 +11,6 @@ public abstract class BoardGame {
     protected int col;
     protected int nbIdenticalCell;
     protected Cell[][] cells;
-    View view = new View();
 
     public BoardGame(int row , int col, int nbIdenticalCell, String name) {
         this.row = row;
