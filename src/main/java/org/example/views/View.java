@@ -1,6 +1,6 @@
 package org.example.views;
 
-import org.example.cell.Cell;
+import org.example.model.cell.Cell;
 import org.example.controller.player.Player;
 
 public class View {
@@ -71,10 +71,6 @@ public class View {
     public void victoryMessage(Player currentPlayer) {
         System.out.println("\t    " + currentPlayer.getName() + " won !!");
         asciiArt.victoryArt();
-    }
-
-    public void failureMessage() {
-        asciiArt.failureArt();
     }
 
     public void drawMessage() {

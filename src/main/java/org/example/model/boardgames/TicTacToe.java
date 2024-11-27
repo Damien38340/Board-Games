@@ -1,15 +1,15 @@
-package org.example.boardgames;
+package org.example.model.boardgames;
 
 import java.util.concurrent.TimeUnit;
 
-import org.example.cell.Cell;
-import org.example.cell.State;
+import org.example.model.cell.Cell;
 import org.example.controller.player.Player;
 
 public class TicTacToe extends BoardGame {
 
     public TicTacToe() {
-       super(3,3,3);    }
+        super(3, 3, 3, "TicTacToe");
+    }
 
     public void populateTable() {
         for (int i = 0; i < row; i++) {
@@ -19,6 +19,7 @@ public class TicTacToe extends BoardGame {
         }
     }
 
+    @Override
     public void setOwner(int[] coordinates, Player player) {
         TimeUnit time = TimeUnit.MILLISECONDS;
 
@@ -31,7 +32,7 @@ public class TicTacToe extends BoardGame {
         }
     }
 
-
+    @Override
     public int getSize() {
         return row;
     }

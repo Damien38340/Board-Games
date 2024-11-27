@@ -41,8 +41,4 @@ public class UserInteraction {
         return sc.nextInt();
     }
 
-    public int getInputNumberFromPlayer() {
-        System.out.println("Please input a column number (1-7):");
-        return sc.nextInt();
-    }
 }

@@ -1,4 +1,4 @@
-package org.example.cell;
+package org.example.model.cell;
 
 public class Cell {
 

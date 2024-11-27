@@ -1,14 +1,15 @@
 package org.example.controller;
 
+import org.example.model.boardgames.BoardGame;
 import org.example.router.UserInteraction;
-import org.example.boardgames.ConnectFour;
-import org.example.boardgames.Gomoku;
-import org.example.boardgames.TicTacToe;
+import org.example.model.boardgames.ConnectFour;
+import org.example.model.boardgames.Gomoku;
+import org.example.model.boardgames.TicTacToe;
 import org.example.controller.player.ArtificialPlayer;
 import org.example.controller.player.HumanPlayer;
 import org.example.controller.player.Player;
 import org.example.views.View;
-import org.example.cell.State;
+import org.example.model.cell.State;
 
 public class Game {
     Player currentPlayer;
@@ -65,7 +66,7 @@ public class Game {
     }
 
     public void startTicTacToe() {
-        TicTacToe ticTacToe = new TicTacToe();
+        BoardGame ticTacToe = new TicTacToe();
         ticTacToe.populateTable(); // Prepare the board
         view.displayTicTacToeLogo();
         mainMenu();
@@ -88,7 +89,7 @@ public class Game {
                     view.victoryMessage(currentPlayer);
                     break;
                 }
-                else if (ticTacToe.isDraw()){
+                else if (isDraw(ticTacToe)){
                     break;
                 }
 
@@ -102,7 +103,7 @@ public class Game {
     }
 
     public void startGomoku() {
-        Gomoku gomoku = new Gomoku();
+        BoardGame gomoku = new Gomoku();
         gomoku.populateTable(); // Prepare the board
 
         view.displayGomokuLogo();
@@ -127,7 +128,7 @@ public class Game {
                     view.victoryMessage(currentPlayer);
                     break;
                 }
-                else if (gomoku.isDraw()){
+                else if (isDraw(gomoku)){
                     break;
                 }
 
@@ -142,7 +143,7 @@ public class Game {
     }
 
     public void startConnectFour() {
-        ConnectFour connectFour = new ConnectFour();
+        BoardGame connectFour = new ConnectFour();
         connectFour.populateTable(); // Prepare the board
         view.displayConnectFourLogo();
         mainMenu();
@@ -156,7 +157,7 @@ public class Game {
                 view.displayBoard(connectFour.getCells()); // Display the board updated after each turn
                 view.playerMessage(currentPlayer); // Display current player's turn
 
-                int coordinates = currentPlayer.getCoordinatesFromConnectFour(connectFour);
+                int[] coordinates = currentPlayer.getCoordinatesFromConnectFour(connectFour);
                 connectFour.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over
@@ -166,7 +167,7 @@ public class Game {
                     break;
                 }
 
-                else if (connectFour.isDraw()){
+                else if (isDraw(connectFour)){
                     break;
                 }
 
@@ -178,5 +179,20 @@ public class Game {
             }
         }
 
+    }
+    public boolean isDraw(BoardGame game) {
+        for (int i = 0; i < game.getSize(); i++) {
+            for (int j = 0; j < game.getSize(); j++) {
+                if (game.getCells()[i][j].getState() == State.EMPTY) {
+                    return false; // if one of the cells is empty, the game is not over yet
+                }
+            }
+        }
+        //If there's no empty cells left and no winner was declared, this is draw
+        // Game over with no winner
+        view.displayBoard(game.getCells()); // Show the final board
+        view.drawMessage();
+        view.gameOverMessage();
+        return true;
     }
 }

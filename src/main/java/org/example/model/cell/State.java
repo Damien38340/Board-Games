@@ -1,4 +1,4 @@
-package org.example.cell;
+package org.example.model.cell;
 
 /**
  * 3 different states in the game, we compare the states of the cells

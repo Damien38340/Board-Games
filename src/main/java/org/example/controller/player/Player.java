@@ -1,9 +1,7 @@
 package org.example.controller.player;
 
-import org.example.boardgames.ConnectFour;
-import org.example.boardgames.Gomoku;
-import org.example.boardgames.TicTacToe;
-import org.example.cell.State;
+import org.example.model.boardgames.BoardGame;
+import org.example.model.cell.State;
 
 public abstract class Player {
 
@@ -24,20 +22,16 @@ public abstract class Player {
         return name;
     }
 
-    protected abstract int[] provideCoordinatesFromTicTacToe(TicTacToe game);
+    protected abstract int[] provideCoordinates(BoardGame game);
 
-    protected abstract int[] provideCoordinatesFromGomoku(Gomoku game);
-
-    protected abstract int provideCoordinatesFromConnectFour(ConnectFour game);
-
-    public int[] getCoordinatesFromTicTacToe(TicTacToe game) {
+    public int[] getCoordinatesFromTicTacToe(BoardGame game) {
 
         int[] coordinates;
         int row, col;
 
         while (true) {
             try {
-                coordinates = provideCoordinatesFromTicTacToe(game);
+                coordinates = provideCoordinates(game);
                 row = coordinates[0];
                 col = coordinates[1];
 
@@ -61,14 +55,14 @@ public abstract class Player {
         return coordinates;
     }
 
-    public int[] getCoordinatesFromGomoku(Gomoku game) {
+    public int[] getCoordinatesFromGomoku(BoardGame game) {
 
         int[] coordinates;
         int row, col;
 
         while (true) {
             try {
-                coordinates = provideCoordinatesFromGomoku(game);
+                coordinates = provideCoordinates(game);
                 row = coordinates[0];
                 col = coordinates[1];
 
@@ -92,11 +86,12 @@ public abstract class Player {
         return coordinates;
     }
 
-    public int getCoordinatesFromConnectFour(ConnectFour game) {
-        int column = provideCoordinatesFromConnectFour(game);
+    public int[] getCoordinatesFromConnectFour(BoardGame game) {
+        int[] coordinates = provideCoordinates(game);
         while (true) {
-            if (column > 0 || column < 8) {
-                return column - 1;
+            if (coordinates[0] > 0 || coordinates[0] < 8) {
+                coordinates = new int[]{(coordinates[0] - 1), coordinates[1]};
+                return coordinates;
             }
         }
     }

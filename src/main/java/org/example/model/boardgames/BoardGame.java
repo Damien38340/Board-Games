@@ -1,24 +1,36 @@
-package org.example.boardgames;
+package org.example.model.boardgames;
 
-import org.example.cell.Cell;
-import org.example.cell.State;
+import org.example.model.cell.Cell;
+import org.example.model.cell.State;
 import org.example.controller.player.Player;
 import org.example.views.View;
 
 public abstract class BoardGame {
+    protected String name;
     protected int row;
     protected int col;
     protected int nbIdenticalCell;
     protected Cell[][] cells;
     View view = new View();
 
-    public BoardGame(int row , int col, int nbIdenticalCell) {
+    public BoardGame(int row , int col, int nbIdenticalCell, String name) {
         this.row = row;
         this.col = col;
         this.nbIdenticalCell = nbIdenticalCell;
-
+        this.name = name;
         this.cells = new Cell[row][col];
     }
+
+    public void populateTable() {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                cells[i][j] = new Cell();
+            }
+        }
+    }
+
+
+
     public boolean isOver(Player currentPlayer) {
 
         State currentState = currentPlayer.getState();
@@ -50,21 +62,6 @@ public abstract class BoardGame {
         return (i >= 0 && i < row && j >= 0 && j < col);
     }
 
-    public boolean isDraw() {
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (getCells()[i][j].getState() == State.EMPTY) {
-                    return false; // if one of the cells is empty, the game is not over yet
-                }
-            }
-        }
-        //If there's no empty cells left and no winner was declared, this is draw
-        // Game over with no winner
-        view.displayBoard(getCells()); // Show the final board
-        view.drawMessage();
-        view.gameOverMessage();
-        return true;
-    }
 
     /**
      * Retrieves the specific Cell object located at the given row and column
@@ -90,5 +87,7 @@ public abstract class BoardGame {
         return this.cells;
     }
 
+    public abstract void setOwner(int[] coordinates, Player player);
 
+    public abstract int getSize();
 }

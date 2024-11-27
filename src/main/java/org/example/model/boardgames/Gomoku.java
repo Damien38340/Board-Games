@@ -1,16 +1,15 @@
-package org.example.boardgames;
+package org.example.model.boardgames;
 
 import java.util.concurrent.TimeUnit;
 
-import org.example.cell.Cell;
+import org.example.model.cell.Cell;
 import org.example.controller.player.Player;
-import org.example.cell.State;
 
 
 public class Gomoku extends BoardGame {
 
     public Gomoku() {
-      super(15,15,5);
+      super(15,15,5, "Gomoku");
     }
 
     public void populateTable() {
@@ -22,6 +21,7 @@ public class Gomoku extends BoardGame {
         }
     }
 
+    @Override
     public void setOwner(int[] coordinates, Player player) {
         TimeUnit time = TimeUnit.MILLISECONDS;
 
@@ -34,6 +34,7 @@ public class Gomoku extends BoardGame {
         }
     }
 
+    @Override
     public int getSize() {
         return row;
     }

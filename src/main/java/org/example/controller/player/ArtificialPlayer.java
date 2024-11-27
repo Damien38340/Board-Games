@@ -2,10 +2,8 @@ package org.example.controller.player;
 
 import java.util.Random;
 
-import org.example.boardgames.ConnectFour;
-import org.example.boardgames.Gomoku;
-import org.example.boardgames.TicTacToe;
-import org.example.cell.State;
+import org.example.model.boardgames.BoardGame;
+import org.example.model.cell.State;
 
 public class ArtificialPlayer extends Player {
 
@@ -24,7 +22,7 @@ public class ArtificialPlayer extends Player {
     }
 
     @Override
-    public int[] provideCoordinatesFromTicTacToe(TicTacToe game) {
+    public int[] provideCoordinates(BoardGame game) {
 
         int row, col;
 
@@ -37,22 +35,4 @@ public class ArtificialPlayer extends Player {
         return new int[] { row, col };
     }
 
-    @Override
-    public int[] provideCoordinatesFromGomoku(Gomoku game) {
-
-        int row, col;
-
-        do {
-            row = randomRow(game.getSize());
-            col = randomCol(game.getSize());
-
-        } while (game.getCell(row, col).getState() != State.EMPTY); // Ensure AI picks an empty cell
-
-        return new int[] { row, col };
-    }
-
-    @Override
-    public int provideCoordinatesFromConnectFour(ConnectFour game) {
-        return random.nextInt(game.getSize()) + 1;
-    }
 }
