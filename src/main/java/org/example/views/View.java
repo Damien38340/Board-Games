@@ -1,7 +1,7 @@
 package org.example.views;
 
 import org.example.cell.Cell;
-import org.example.player.Player;
+import org.example.controller.player.Player;
 
 public class View {
 

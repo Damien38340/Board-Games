@@ -1,4 +1,4 @@
-package org.example.player;
+package org.example.controller.player;
 
 import java.util.Random;
 
@@ -32,7 +32,7 @@ public class ArtificialPlayer extends Player {
             row = randomRow(game.getSize());
             col = randomCol(game.getSize());
 
-        } while (!game.getCell(row, col).getRepresentation().equals("   ")); // Ensure AI picks an empty cell
+        } while (game.getCell(row, col).getState() != State.EMPTY); // Ensure AI picks an empty cell
 
         return new int[] { row, col };
     }
@@ -46,7 +46,7 @@ public class ArtificialPlayer extends Player {
             row = randomRow(game.getSize());
             col = randomCol(game.getSize());
 
-        } while (!game.getCell(row, col).getRepresentation().equals("   ")); // Ensure AI picks an empty cell
+        } while (game.getCell(row, col).getState() != State.EMPTY); // Ensure AI picks an empty cell
 
         return new int[] { row, col };
     }

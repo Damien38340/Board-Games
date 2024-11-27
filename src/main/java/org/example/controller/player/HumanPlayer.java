@@ -1,6 +1,6 @@
-package org.example.player;
+package org.example.controller.player;
 
-import org.example.UserInteraction;
+import org.example.router.UserInteraction;
 import org.example.boardgames.ConnectFour;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;

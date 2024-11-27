@@ -1,11 +1,12 @@
-package org.example;
+package org.example.controller;
 
+import org.example.router.UserInteraction;
 import org.example.boardgames.ConnectFour;
 import org.example.boardgames.Gomoku;
 import org.example.boardgames.TicTacToe;
-import org.example.player.ArtificialPlayer;
-import org.example.player.HumanPlayer;
-import org.example.player.Player;
+import org.example.controller.player.ArtificialPlayer;
+import org.example.controller.player.HumanPlayer;
+import org.example.controller.player.Player;
 import org.example.views.View;
 import org.example.cell.State;
 
@@ -82,7 +83,12 @@ public class Game {
                 ticTacToe.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over
-                if (ticTacToe.checkGameOverTicTacToe(currentPlayer)) {
+                if (ticTacToe.isOver(currentPlayer)) {
+                    view.displayBoard(ticTacToe.getCells());
+                    view.victoryMessage(currentPlayer);
+                    break;
+                }
+                else if (ticTacToe.isDraw()){
                     break;
                 }
 
@@ -116,7 +122,12 @@ public class Game {
                 gomoku.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over
-                if (gomoku.checkGameOverGomoku(currentPlayer)) {
+                if (gomoku.isOver(currentPlayer)) {
+                    view.displayBoard(gomoku.getCells());
+                    view.victoryMessage(currentPlayer);
+                    break;
+                }
+                else if (gomoku.isDraw()){
                     break;
                 }
 
@@ -149,9 +160,13 @@ public class Game {
                 connectFour.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over
-                if (connectFour.checkGameOver(currentPlayer)) {
+                if (connectFour.isOver(currentPlayer)) {
                     view.displayBoard(connectFour.getCells());
                     view.victoryMessage(currentPlayer);
+                    break;
+                }
+
+                else if (connectFour.isDraw()){
                     break;
                 }
 

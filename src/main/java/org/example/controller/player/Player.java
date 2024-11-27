@@ -1,4 +1,4 @@
-package org.example.player;
+package org.example.controller.player;
 
 import org.example.boardgames.ConnectFour;
 import org.example.boardgames.Gomoku;
@@ -45,7 +45,7 @@ public abstract class Player {
                     System.out.println("Invalid row or column number. Please try again.");
                 }
                 // Validate if the cell is empty
-                else if (!game.getCell(row, col).getRepresentation().equals("   ")) {
+                else if (game.getCell(row, col).getState() != State.EMPTY) {
                     System.out.println("Cell is already occupied. Please choose an empty cell.");
                 }
                 // If valid, return the coordinates
@@ -76,7 +76,7 @@ public abstract class Player {
                     System.out.println("Invalid row or column number. Please try again.");
                 }
                 // Validate if the cell is empty
-                else if (!game.getCell(row, col).getRepresentation().equals("   ")) {
+                else if (game.getCell(row, col).getState() != State.EMPTY) {
                     System.out.println("Cell is already occupied. Please choose an empty cell.");
                 }
                 // If valid, return the coordinates

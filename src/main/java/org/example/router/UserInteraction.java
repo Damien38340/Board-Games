@@ -1,4 +1,4 @@
-package org.example;
+package org.example.router;
 
 import java.util.Scanner;
 
