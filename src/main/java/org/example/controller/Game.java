@@ -18,6 +18,7 @@ public class Game {
     Player secondPlayer;
     UserInteraction userInteraction;
     View view;
+    AsciiArt asciiArt;
     BoardGame ticTacToe;
     BoardGame gomoku;
     BoardGame connectFour;
@@ -30,6 +31,7 @@ public class Game {
 
         // Initialize game components
         view = new View();
+        asciiArt = new AsciiArt();
         userInteraction = new UserInteraction();
         ticTacToe = new TicTacToe();
         gomoku = new Gomoku();
@@ -93,9 +95,10 @@ public class Game {
                 game.setOwner(coordinates, currentPlayer);
 
                 // Check if the game is over
-                if (game.isOver(currentPlayer)) {
+                if (isOver(game)) {
                     view.displayBoard(game.getCells());
                     view.victoryMessage(currentPlayer);
+                    asciiArt.victoryArt();
                     break;
                 } else if (isDraw(game)) {
                     break;
@@ -110,6 +113,38 @@ public class Game {
         }
     }
 
+    public boolean isOver(BoardGame game) {
+
+        State currentState = currentPlayer.getState();
+
+        for (int i = 0; i < game.getRow(); i++) {
+            for (int j = 0; j < gomoku.getCol(); j++) {
+                if (checkDirection(i, j, 0, 1, currentState, game)
+                        || checkDirection(i, j, 1, 0, currentState, game)
+                        || checkDirection(i, j, 1, 1, currentState, game)
+                        || checkDirection(i, j, 1, -1, currentState, game)) return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkDirection(int i, int j, int u, int v, State currentState, BoardGame game) {
+        for (int k = 0; k < game.getNbIdenticalCell(); k++) {
+            if (!exist(i + u * k, j + v * k, game)) {
+                return false;
+            }
+            if (game.getCell(i + u * k, j + v * k).getState() != currentState) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean exist(int i, int j, BoardGame game) {
+        return (i >= 0 && i < game.getRow() && j >= 0 && j < game.getCol());
+    }
+
+
     public boolean isDraw(BoardGame game) {
         for (int i = 0; i < game.getSize(); i++) {
             for (int j = 0; j < game.getSize(); j++) {
@@ -121,13 +156,12 @@ public class Game {
         //If there's no empty cells left and no winner was declared, this is draw
         // Game over with no winner
         view.displayBoard(game.getCells()); // Show the final board
-        view.drawMessage();
-        view.gameOverMessage();
+        asciiArt.drawArt();
+        asciiArt.gameOverArt();
         return true;
     }
 
     public void chooseLogo(BoardGame game) {
-        AsciiArt asciiArt = new AsciiArt();
 
         if (game instanceof TicTacToe) {
             asciiArt.ticTacToeLogo();

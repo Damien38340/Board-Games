@@ -19,7 +19,7 @@ public class ConnectFour extends BoardGame {
         TimeUnit time = TimeUnit.MILLISECONDS;
         int i = coordinates[0];
         int j = coordinates[1];
-        while (exist(i, j) && checkNextCellForEquals(i - 1, j)) {
+        while (existForConnectFour(i, j) && checkNextCellForEquals(i - 1, j)) {
             animateConnectFour(i, j);
             cells[i][j].setState(player.getState());
             i++;
@@ -42,6 +42,10 @@ public class ConnectFour extends BoardGame {
 
     public boolean checkNextCellForEquals(int i, int j) {
         return i + 1 == 6 || cells[i + 1][j].getState() == State.EMPTY;
+    }
+
+    private boolean existForConnectFour(int i, int j){
+        return (i >= 0 && i < row && j >= 0 && j < col);
     }
 
     @Override

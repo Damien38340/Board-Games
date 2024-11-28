@@ -5,8 +5,6 @@ import org.example.controller.player.Player;
 
 public class View {
 
-    AsciiArt asciiArt = new AsciiArt();
-
     // Only on Linux
     public void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -44,25 +42,16 @@ public class View {
             }
             System.out.println();
         }
-
     }
 
     public void playerMessage(Player currentPlayer) {
         System.out.println(currentPlayer.getName());
     }
 
-    public void gameOverMessage() {
-        asciiArt.gameOverArt();
-    }
-
     public void victoryMessage(Player currentPlayer) {
         System.out.println("\t    " + currentPlayer.getName() + " won !!");
-        asciiArt.victoryArt();
     }
 
-    public void drawMessage() {
-        asciiArt.drawArt();
-    }
 
     public void defaultMessage() {
         System.out.println("\n Invalid choice, please select a valid option.");

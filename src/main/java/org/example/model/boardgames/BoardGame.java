@@ -1,7 +1,6 @@
 package org.example.model.boardgames;
 
 import org.example.model.cell.Cell;
-import org.example.model.cell.State;
 import org.example.controller.player.Player;
 
 
@@ -28,38 +27,6 @@ public abstract class BoardGame {
         }
     }
 
-
-
-    public boolean isOver(Player currentPlayer) {
-
-        State currentState = currentPlayer.getState();
-
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (checkDirection(i, j, 0, 1, currentState)
-                        || checkDirection(i, j, 1, 0, currentState)
-                        || checkDirection(i, j, 1, 1, currentState)
-                        || checkDirection(i, j, 1, -1, currentState)) return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean checkDirection(int i, int j, int u, int v, State currentState) {
-        for (int k = 0; k < nbIdenticalCell; k++) {
-            if (!exist(i + u * k, j + v * k)) {
-                return false;
-            }
-            if (getCell(i + u * k, j + v * k).getState() != currentState) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean exist(int i, int j) {
-        return (i >= 0 && i < row && j >= 0 && j < col);
-    }
 
 
     /**
@@ -89,4 +56,16 @@ public abstract class BoardGame {
     public abstract void setOwner(int[] coordinates, Player player);
 
     public abstract int getSize();
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public int getNbIdenticalCell() {
+        return nbIdenticalCell;
+    }
 }

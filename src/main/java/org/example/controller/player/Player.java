@@ -49,9 +49,9 @@ public abstract class Player {
                     break;
                 }
             } catch (NumberFormatException e) {
-//                System.err.println("Invalid input. Please enter valid numbers.");
+                System.err.println("Invalid input. Please enter valid numbers.");
             } catch (Exception e) {
-//                System.err.println("An unexpected error occurred: " + e.getMessage());
+                System.err.println("An unexpected error occurred: " + e.getMessage());
             }
         }
         return coordinates;
@@ -62,7 +62,7 @@ public abstract class Player {
     }
 
     @Override
-    public String toString() {
-        return getRepresentation();
+    public String toString(){
+        return name;
     }
 }
